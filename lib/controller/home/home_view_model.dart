@@ -1,4 +1,3 @@
-import 'package:farming_manager/widgets/toast.dart';
 import 'package:fimber/fimber.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -12,7 +11,6 @@ class HomeViewModel extends GetxController {
     _getCurrentLocation();
     super.onInit();
   }
-
 
   Future<void> _getCurrentLocation() async {
     final hasPermission = await _checkPermission();
