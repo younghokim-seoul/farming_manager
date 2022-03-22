@@ -1,6 +1,6 @@
 import 'package:farming_manager/constants/app_theme.dart';
 import 'package:farming_manager/controller/splash/splash_binding.dart';
-import 'package:farming_manager/router/AppPages.dart';
+import 'package:farming_manager/router/pages.dart';
 import 'package:farming_manager/router/routese.dart';
 import 'package:farming_manager/screens/splash.dart';
 import 'package:fimber/fimber.dart';
