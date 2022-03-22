@@ -24,8 +24,6 @@ class MyApp extends StatelessWidget {
       defaultTransition: Transition.cupertino,
       theme: AppTheme.light,
       themeMode: ThemeMode.light,
-      home: const SplashScreen(),
-      initialBinding: SplashBinding(),
       initialRoute: Routes.SPLASH,
       getPages: AppPages.pages,
     );
