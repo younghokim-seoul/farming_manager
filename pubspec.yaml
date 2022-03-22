@@ -37,6 +37,7 @@ dependencies:
   get: ^4.6.1
   fimber: ^0.6.5
   google_fonts: ^2.3.1
+  cached_network_image: ^3.2.0
 
 dev_dependencies:
   flutter_test:
