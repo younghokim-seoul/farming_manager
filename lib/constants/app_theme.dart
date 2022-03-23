@@ -4,5 +4,6 @@ class AppTheme {
   static final ThemeData light = ThemeData(
     primarySwatch: Colors.blue,
     brightness: Brightness.light,
+    scaffoldBackgroundColor: Colors.white,
   );
 }
