@@ -42,6 +42,11 @@ dependencies:
   fluttertoast: ^8.0.9
   freezed_annotation:
   auto_size_text: ^3.0.0
+  weather_icons: ^3.0.0
+  supercharged: ^2.1.1
+  simple_animations: ^4.0.1
+
+
 
 
 dev_dependencies:

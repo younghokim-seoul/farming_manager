@@ -11,6 +11,12 @@ class SplashViewModel extends GetxController {
     super.onInit();
   }
 
+
+  @override
+  void onReady() {
+
+  }
+
   _setInitialScreen() async {
     Fimber.d(":::::::::_setInitialScreen");
     //다음화면으로 이동하면서 기존에 stack을 모두 종료한다.
