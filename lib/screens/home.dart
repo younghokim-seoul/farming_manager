@@ -1,4 +1,5 @@
 import 'package:farming_manager/constants/colors.dart';
+import 'package:farming_manager/constants/keys.dart';
 import 'package:farming_manager/controller/home/home_view_model.dart';
 import 'package:farming_manager/models/home/home_category_model.dart';
 import 'package:farming_manager/router/routese.dart';
@@ -20,8 +21,8 @@ class HomeScreen extends GetView<HomeViewModel> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColors.yellow,
-        key: const Key("home"),
         body: SafeArea(
+          key: Keys.HOME_SCREEN,
           child: ListView(
             padding: const EdgeInsets.all(5),
             children: [

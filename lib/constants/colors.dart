@@ -6,6 +6,7 @@ abstract class AppColors {
 
 
 // fixed colors
+  static const transparent = Colors.transparent;
   static const white = Colors.white;
   static const black = Colors.black;
   static const grey = Colors.grey;
