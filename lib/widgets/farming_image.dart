@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 
@@ -22,8 +23,8 @@ class FarmingImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-          width: width,
-          height: height,
+          width: width.w,
+          height: height.h,
           imageUrl: url ?? "",
           placeholder: (context, url) => const CupertinoActivityIndicator(),
           errorWidget: (context, url, error) => Container(child: Icon(WeatherIcons.day_cloudy_gusts,size: 100,color: const Color(0xFFFFBB00))));

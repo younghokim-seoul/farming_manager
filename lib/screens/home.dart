@@ -22,25 +22,23 @@ class HomeScreen extends GetView<HomeViewModel> {
             padding: const EdgeInsets.all(5),
             children: [
               Container(padding: const EdgeInsets.all(5), child: _menuLayout()),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                                offset: const Offset(0, 2),
-                                color: Colors.black.withOpacity(.1),
-                                blurRadius: 8)
-                          ]),
-                      child: FarmingImage(url: null, width : MediaQuery.of(context).size.width * 0.5, height : MediaQuery.of(context).size.width * 0.5)),
-                    Container( child: WeatherDetailSection())
-                  ],
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.circular(8),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: const Offset(0, 2),
+                              color: Colors.black.withOpacity(.1),
+                              blurRadius: 8)
+                        ]),
+                    child: FarmingImage(url: null, width : MediaQuery.of(context).size.width * 0.5, height : MediaQuery.of(context).size.width * 0.5)),
+                  const WeatherDetailSection()
+                ],
               )
             ],
           ),
