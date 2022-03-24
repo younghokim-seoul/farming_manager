@@ -18,12 +18,12 @@ class CalendarScreen extends GetView<CalendarViewModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.transparent,
           title: const FarmingText(text: "달력", size: 16)),
-      body: Container(
-          height: MediaQuery.of(context).size.height,
+      body: SingleChildScrollView(
           child:  Obx(() => _buildCalendarCustom())),
     );
   }
@@ -38,7 +38,7 @@ class CalendarScreen extends GetView<CalendarViewModel> {
       lastDay: kLastDay,
       locale: 'ko-KR',
       daysOfWeekHeight: 30.h,
-      rowHeight: 100.h,
+      rowHeight: 90.h,
       calendarFormat: CalendarFormat.month,
       calendarBuilders: _calendarBuilder(),
       headerVisible: true,
