@@ -43,8 +43,11 @@ class CalendarScreen extends GetView<CalendarViewModel> {
       calendarFormat: CalendarFormat.month,
       availableGestures: AvailableGestures.all,
       daysOfWeekVisible : true,
-      sixWeekMonthsEnforced: false,
       headerVisible: true,
+      headerStyle: const HeaderStyle(
+        formatButtonVisible: false,
+        titleCentered: true
+      ),
     );
   }
 
