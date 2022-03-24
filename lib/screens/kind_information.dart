@@ -68,6 +68,7 @@ class KindInformationScreen extends GetView<KindInformationViewModel> {
       },
       onChanged: (value) {
         //Do something when changing the item if you want.
+        Fimber.i("clicker -> " + value.toString());
       },
       onSaved: (value) {
         Fimber.i("clicker -> " + value.toString());

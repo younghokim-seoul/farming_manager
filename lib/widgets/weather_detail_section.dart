@@ -43,7 +43,7 @@ class WeatherDetailSection extends StatelessWidget {
     );
   }
 
-  Widget _gridWeather(String header, String body, IconData iconData) {
+  Widget _gridWeather(String header, String body, IconData icon) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
@@ -61,10 +61,10 @@ class WeatherDetailSection extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(bottom: 15, right: 5),
+           Padding(
+            padding: const EdgeInsets.only(bottom: 15, right: 5),
             child: Icon(
-              WeatherIcons.wind,
+              icon,
               color: Colors.blue,
               size: 35,
             ),
