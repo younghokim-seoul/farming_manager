@@ -15,6 +15,6 @@ abstract class AppPages {
     GetPage(name: Routes.SPLASH, page: () => const SplashScreen(), binding: SplashBinding()),
     GetPage(name: Routes.HOME, page: () => const HomeScreen(), binding: HomeBinding()),
     GetPage(name: Routes.KING_INFORMATION, page: () => const KindInformationScreen(), binding: KindInformationBinding()),
-    GetPage(name: Routes.CALENDAR, page: () => const CalendarScreen(), binding: CalendarViewBinding()),
+    GetPage(name: Routes.CALENDAR, page: () =>  const CalendarScreen(), binding: CalendarViewBinding()),
     ];
 }

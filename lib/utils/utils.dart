@@ -13,3 +13,10 @@ const List<HomeCategoryModel> categories = [
 ];
 
 const List<String> kingCategories = ['식량작물', '특용작물', '채소', '과수', '화훼', '녹비작물'];
+
+
+
+
+final kToday = DateTime.now();
+final kFirstDay = DateTime(kToday.year, kToday.month - 3, kToday.day);
+final kLastDay = DateTime(kToday.year, kToday.month + 3, kToday.day);
