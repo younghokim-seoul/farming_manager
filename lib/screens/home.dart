@@ -8,6 +8,7 @@ import 'package:farming_manager/widgets/weather_detail_section.dart';
 import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:weather_icons/weather_icons.dart';
 
 import '../utils/utils.dart';
 import '../widgets/fadeIn.dart';
@@ -24,7 +25,8 @@ class HomeScreen extends GetView<HomeViewModel> {
           child: ListView(
             padding: const EdgeInsets.all(5),
             children: [
-              Container(padding: const EdgeInsets.all(5), child: _menuLayout()),
+              Container(
+                  padding: const EdgeInsets.all(5), child: _buildMenuLayout()),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -39,7 +41,12 @@ class HomeScreen extends GetView<HomeViewModel> {
                               color: Colors.black.withOpacity(.1),
                               blurRadius: 8)
                         ]),
-                    child: FarmingImage(url: null, width : MediaQuery.of(context).size.width * 0.5, height : MediaQuery.of(context).size.width * 0.5)),
+                    child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        height: MediaQuery.of(context).size.width * 0.5,
+                        child: _buildWeatherIcon(context, null),
+                    ),
+                  ),
                   FadeIn(
                     delay: 0.66,
                     child: const WeatherDetailSection(),
@@ -51,7 +58,15 @@ class HomeScreen extends GetView<HomeViewModel> {
         ));
   }
 
-  Widget _menuLayout() {
+  Widget _buildWeatherIcon(BuildContext context, String? url) {
+    return url == null
+        ? Container(
+            child: const Icon(WeatherIcons.day_cloudy_gusts,
+                size: 100, color: Color(0xFFFFBB00)))
+        : FarmingImage(url: "url");
+  }
+
+  Widget _buildMenuLayout() {
     return GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
@@ -67,9 +82,9 @@ class HomeScreen extends GetView<HomeViewModel> {
         itemBuilder: (context, index) {
           HomeCategoryModel homeCategoryModel = categories[index];
           return GestureDetector(
-            onTap:(){
+            onTap: () {
               Fimber.i("[Click] => " + homeCategoryModel.toJson().toString());
-              Get.toNamed(Routes.KING_INFORMATION);
+              Get.toNamed(homeCategoryModel.id);
             },
             child: ItemMenuCard(model: homeCategoryModel),
           );

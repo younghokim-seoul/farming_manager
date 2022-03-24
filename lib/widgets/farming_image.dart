@@ -10,7 +10,7 @@ class FarmingImage extends StatelessWidget {
   final double width;
   final double height;
   final Color color;
-  final String? url;
+  final String url;
 
   const FarmingImage({
     Key? key,
@@ -25,8 +25,8 @@ class FarmingImage extends StatelessWidget {
     return CachedNetworkImage(
           width: width.w,
           height: height.h,
-          imageUrl: url ?? "",
+          imageUrl: url,
           placeholder: (context, url) => const CupertinoActivityIndicator(),
-          errorWidget: (context, url, error) => Container(child: Icon(WeatherIcons.day_cloudy_gusts,size: 100,color: const Color(0xFFFFBB00))));
+          errorWidget: (context, url, error) => Container());
   }
 }
