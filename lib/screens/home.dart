@@ -1,13 +1,16 @@
 import 'package:farming_manager/constants/colors.dart';
 import 'package:farming_manager/controller/home/home_view_model.dart';
 import 'package:farming_manager/models/home/home_category_model.dart';
+import 'package:farming_manager/router/routese.dart';
 import 'package:farming_manager/widgets/farming_image.dart';
 import 'package:farming_manager/widgets/menu_section.dart';
 import 'package:farming_manager/widgets/weather_detail_section.dart';
+import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../utils/utils.dart';
+import '../widgets/fadeIn.dart';
 
 class HomeScreen extends GetView<HomeViewModel> {
   const HomeScreen({Key? key}) : super(key: key);
@@ -37,7 +40,10 @@ class HomeScreen extends GetView<HomeViewModel> {
                               blurRadius: 8)
                         ]),
                     child: FarmingImage(url: null, width : MediaQuery.of(context).size.width * 0.5, height : MediaQuery.of(context).size.width * 0.5)),
-                  const WeatherDetailSection()
+                  FadeIn(
+                    delay: 0.66,
+                    child: const WeatherDetailSection(),
+                  )
                 ],
               )
             ],
@@ -60,7 +66,13 @@ class HomeScreen extends GetView<HomeViewModel> {
         itemCount: categories.length,
         itemBuilder: (context, index) {
           HomeCategoryModel homeCategoryModel = categories[index];
-          return ItemMenuCard(model: homeCategoryModel);
+          return GestureDetector(
+            onTap:(){
+              Fimber.i("[Click] => " + homeCategoryModel.toJson().toString());
+              Get.toNamed(Routes.KING_INFORMATION);
+            },
+            child: ItemMenuCard(model: homeCategoryModel),
+          );
         });
   }
 }

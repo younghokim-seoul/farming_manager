@@ -10,19 +10,6 @@ class ItemMenuCard extends StatelessWidget {
 
   const ItemMenuCard({Key? key, required this.model}) : super(key: key);
 
-  // decoration: BoxDecoration(
-  // borderRadius: BorderRadius.circular(15),
-  // color: Colors.white,
-  // boxShadow: [
-  // BoxShadow(
-  // color: Colors.grey.withOpacity(0.25),
-  // spreadRadius: 0,
-  // blurRadius: 10,
-  // offset: const Offset(6, 8),
-  // ),
-  // ],
-  // ),
-  // padding: const EdgeInsets.all(10),
   @override
   Widget build(BuildContext context) {
     return Container(

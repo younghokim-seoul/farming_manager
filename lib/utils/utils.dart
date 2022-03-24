@@ -12,3 +12,13 @@ const List<HomeCategoryModel> categories = [
   HomeCategoryModel(name: "미리알림", id: "id"),
   HomeCategoryModel(name: "달력", id: "id")
 ];
+
+
+const List<String> kingCategories = [
+  '식량작물',
+  '특용작물',
+  '채소',
+  '과수',
+  '화훼',
+  '녹비작물'
+];
