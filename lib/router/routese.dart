@@ -3,4 +3,5 @@ abstract class Routes {
   static const HOME = '/home';
   static const KING_INFORMATION = '/kind_information';
   static const CALENDAR = '/calendar';
+  static const MEMO = '/memo';
 }
