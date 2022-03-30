@@ -180,7 +180,8 @@ class MemoScreen extends GetView<MemoViewModel> {
                       onPressed: () {},
                       child: const Text('삭제'),
                     ),
-                  )
+                  ),
+                  SizedBox(width: Get.width * 0.3)
                 ],
               )
             ],
