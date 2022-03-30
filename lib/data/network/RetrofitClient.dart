@@ -1,10 +1,8 @@
-
-
 import 'package:dio/dio.dart';
 import 'package:farming_manager/data/request/weather_request.dart';
+import 'package:farming_manager/data/response/king_category_response.dart';
 import 'package:farming_manager/data/response/weather_response.dart';
 import 'package:retrofit/retrofit.dart';
-
 
 part 'RetrofitClient.g.dart';
 
@@ -13,5 +11,9 @@ abstract class RetrofitClient {
   factory RetrofitClient(Dio dio, {String baseUrl}) = _RetrofitClient;
 
   @POST("/callApi/getWeatherInfo")
-    Future<WeatherResponse> getWeatherInfo(@Body() WeatherRequest request);
+  Future<WeatherResponse> getWeatherInfo(@Body() WeatherRequest request);
+
+  @POST("/callApi/getItemCategory")
+  Future<List<KindCategoryResponse>> getKindCategory();
+
 }

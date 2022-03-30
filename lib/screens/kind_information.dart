@@ -1,4 +1,5 @@
 import 'package:farming_manager/controller/kind/kind_information_view_model.dart';
+import 'package:farming_manager/data/response/king_category_response.dart';
 import 'package:farming_manager/utils/utils.dart';
 import 'package:farming_manager/widgets/farming_dropdown.dart';
 import 'package:farming_manager/widgets/farming_text.dart';
@@ -18,15 +19,23 @@ class KindInformationScreen extends GetView<KindInformationViewModel> {
           centerTitle: true,
           backgroundColor: Colors.transparent,
           title: const FarmingText(text: "품종 정보", size: 16)),
-      body: Column(
+      body: Obx(() => _buildBody(context, controller)),
+    );
+  }
+
+  Widget _buildBody(BuildContext context, KindInformationViewModel viewModel) {
+    if (viewModel.loading.value == true) {
+      return const Center(child: CircularProgressIndicator());
+    } else {
+      return Column(
         children: [
           Container(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               width: MediaQuery.of(context).size.width * 0.4.w,
               child: _kindSelectDropDown()),
         ],
-      ),
-    );
+      );
+    }
   }
 
   Widget _kindSelectDropDown() {
@@ -50,11 +59,11 @@ class KindInformationScreen extends GetView<KindInformationViewModel> {
       dropdownDecoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
       ),
-      items: kingCategories
-          .map((item) => DropdownMenuItem<String>(
+      items: controller.categoryList
+          .map((item) => DropdownMenuItem<KindCategoryResponse>(
                 value: item,
                 child: Text(
-                  item,
+                  item.categoryNm,
                   style: const TextStyle(
                     fontSize: 14,
                   ),

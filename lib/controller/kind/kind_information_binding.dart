@@ -4,6 +4,6 @@ import 'package:get/get.dart';
 class KindInformationBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(KindInformationViewModel());
+    Get.lazyPut(() => KindInformationViewModel());
   }
 }
