@@ -1,34 +1,31 @@
 import 'package:farming_manager/constants/colors.dart';
 import 'package:farming_manager/constants/keys.dart';
 import 'package:farming_manager/controller/home/home_view_model.dart';
+import 'package:farming_manager/data/response/weather_response.dart';
 import 'package:farming_manager/models/home/home_category_model.dart';
-import 'package:farming_manager/router/routese.dart';
-import 'package:farming_manager/widgets/farming_image.dart';
 import 'package:farming_manager/widgets/menu_section.dart';
 import 'package:farming_manager/widgets/weather_detail_section.dart';
 import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:weather_icons/weather_icons.dart';
 
 import '../utils/utils.dart';
-import '../widgets/fadeIn.dart';
 
 class HomeScreen extends GetView<HomeViewModel> {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    controller.getCurrentLocation();
     return Scaffold(
         backgroundColor: AppColors.yellow,
         body: SafeArea(
           key: Keys.HOME_SCREEN,
-          child: ListView(
+          child:
+          ListView(
             padding: const EdgeInsets.all(5),
             children: [
-              Container(
-                  padding: const EdgeInsets.all(5), child: _buildMenuLayout()),
+              Container(padding: const EdgeInsets.all(5), child: _buildMenuLayout()),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -44,14 +41,14 @@ class HomeScreen extends GetView<HomeViewModel> {
                               blurRadius: 8)
                         ]),
                     child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        height: MediaQuery.of(context).size.width * 0.5,
-                        child: _buildWeatherIcon(context, null),
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height / 3.5,
+                        child: Obx(() => _buildWeatherIcon(context,controller.currentWeather)),
                     ),
                   ),
-                  FadeIn(
-                    delay: 0.66,
-                    child: const WeatherDetailSection(),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Obx(() => WeatherDetailSection(wData: controller.currentWeather)),
                   )
                 ],
               )
@@ -60,12 +57,8 @@ class HomeScreen extends GetView<HomeViewModel> {
         ));
   }
 
-  Widget _buildWeatherIcon(BuildContext context, String? url) {
-    return url == null
-        ? Container(
-            child: const Icon(WeatherIcons.day_cloudy_gusts,
-                size: 100, color: Color(0xFFFFBB00)))
-        : FarmingImage(url: "url");
+  Widget _buildWeatherIcon(BuildContext context, WeatherResponse weatherResponse) {
+    return MapString.mapStringToIcon(weatherResponse.weatherCode, context, 100.h);
   }
 
   Widget _buildMenuLayout() {

@@ -1,21 +1,26 @@
+import 'package:farming_manager/data/response/weather_response.dart';
+import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_icons/weather_icons.dart';
 
-
-
 class WeatherDetailSection extends StatelessWidget {
-  const WeatherDetailSection({Key? key}) : super(key: key);
+  final WeatherResponse wData;
+
+  const WeatherDetailSection({
+    Key? key,
+    required this.wData,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    Fimber.i("wData " + wData.toString());
+
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          height: MediaQuery.of(context).size.height / 3,
-          width: MediaQuery.of(context).size.width,
-
-          child: GridView(
+        GridView(
             padding: const EdgeInsets.all(15),
             shrinkWrap: true,
             physics: const ScrollPhysics(),
@@ -26,19 +31,13 @@ class WeatherDetailSection extends StatelessWidget {
               mainAxisSpacing: 15,
             ),
             children: [
-              _gridWeather('65%', 'Humidity',
-                  WeatherIcons.raindrop),
-              _gridWeather('2.06 km/h', 'Wind',
-                  WeatherIcons.strong_wind),
-              _gridWeather(
-                  '11°C',
-                  'Feels Like',
-                  WeatherIcons.celsius),
-              _gridWeather('1201 hPa', 'Pressure',
-                  WeatherIcons.barometer),
+              _gridWeather(wData.weatherRainType, '강수형태', WeatherIcons.na),
+              _gridWeather('${wData.weatherHumidity}%', '습도', WeatherIcons.raindrop),
+              _gridWeather('${wData.weatherWindSpeed} km/h', '풍속', WeatherIcons.strong_wind),
+              _gridWeather('${wData.weatherTemp}°C', '현재기온', WeatherIcons.celsius),
+              _gridWeather('${wData.weatherRainPercent}%', '강수확률', WeatherIcons.raindrops),
             ],
           ),
-        ),
       ],
     );
   }
@@ -61,7 +60,7 @@ class WeatherDetailSection extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-           Padding(
+          Padding(
             padding: const EdgeInsets.only(bottom: 15, right: 5),
             child: Icon(
               icon,
@@ -86,7 +85,8 @@ class WeatherDetailSection extends StatelessWidget {
               FittedBox(
                 child: Text(
                   body,
-                  style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w400, fontSize: 15),
                 ),
               ),
             ],

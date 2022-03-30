@@ -1,5 +1,7 @@
 import 'package:farming_manager/models/home/home_category_model.dart';
 import 'package:farming_manager/router/routese.dart';
+import 'package:flutter/material.dart';
+import 'package:weather_icons/weather_icons.dart';
 
 const List<HomeCategoryModel> categories = [
   HomeCategoryModel(name: "품종정보", id: Routes.KING_INFORMATION),
@@ -20,3 +22,33 @@ const List<String> kingCategories = ['식량작물', '특용작물', '채소', '
 final kToday = DateTime.now();
 final kFirstDay = DateTime(kToday.year, kToday.month - 3, kToday.day);
 final kLastDay = DateTime(kToday.year, kToday.month + 3, kToday.day);
+
+
+class MapString {
+  static Icon mapStringToIcon(
+      String input, BuildContext context, double iconSize) {
+    IconData myIcon;
+    switch (input) {
+      case '0':
+        myIcon = WeatherIcons.sunrise;
+        break;
+      case '1':
+        myIcon = WeatherIcons.raindrop;
+        break;
+      case '2':
+        myIcon = WeatherIcons.night_snow_thunderstorm;
+        break;
+      case '3':
+        myIcon = WeatherIcons.snow;
+        break;
+      default:
+        myIcon = WeatherIcons.na;
+    }
+    return Icon(
+      myIcon,
+      size: iconSize,
+      color: Theme.of(context).primaryColor,
+    );
+  }
+}
+
