@@ -1,6 +1,7 @@
 import 'package:farming_manager/models/home/home_category_model.dart';
 import 'package:farming_manager/router/routese.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 const List<HomeCategoryModel> categories = [
@@ -23,6 +24,9 @@ final kToday = DateTime.now();
 final kFirstDay = DateTime(kToday.year, kToday.month - 3, kToday.day);
 final kLastDay = DateTime(kToday.year, kToday.month + 3, kToday.day);
 
+String dataTimeToString(DateTime epoch) {
+  return DateFormat('yyyy년 M월 d일', 'ko').format(epoch);
+}
 
 class MapString {
   static Icon mapStringToIcon(

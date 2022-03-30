@@ -25,11 +25,11 @@ class HomeViewModel extends GetxController {
   @override
   void onInit() {
     Fimber.i(":::::::::HomeViewModel onInit " + repository.toString());
-    getCurrentLocation();
+    _getCurrentLocation();
     super.onInit();
   }
 
-  Future<void> getCurrentLocation() async {
+  Future<void> _getCurrentLocation() async {
     final hasPermission = await _checkPermission();
 
     Fimber.i("::::hasPermission " + hasPermission.toString());
