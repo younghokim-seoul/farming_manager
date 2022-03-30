@@ -19,6 +19,7 @@ class HomeScreen extends GetView<HomeViewModel> {
 
   @override
   Widget build(BuildContext context) {
+    controller.getCurrentLocation();
     return Scaffold(
         backgroundColor: AppColors.yellow,
         body: SafeArea(

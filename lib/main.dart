@@ -1,5 +1,6 @@
 import 'package:farming_manager/constants/app_theme.dart';
 import 'package:farming_manager/controller/splash/splash_binding.dart';
+import 'package:farming_manager/di/app_module.dart';
 import 'package:farming_manager/router/pages.dart';
 import 'package:farming_manager/router/routese.dart';
 import 'package:farming_manager/screens/splash.dart';
@@ -12,6 +13,7 @@ import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
   Fimber.plantTree(DebugTree(useColors: true));
+  setupAppModule();
   await initializeDateFormatting().then((value) =>   runApp(const MyApp()));
 
 }
