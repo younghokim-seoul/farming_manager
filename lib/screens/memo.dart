@@ -23,80 +23,67 @@ class MemoScreen extends GetView<MemoViewModel> {
             backgroundColor: const Color.fromARGB(0, 109, 131, 12),
             title: const FarmingText(text: "메모장", size: 16)),
         body: SafeArea(
-            child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                SizedBox(
-                  width: 150,
-                  height: 55,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(3.0),
-                      side: const BorderSide(
-                        width: 1.0,
-                      ),
-                    ),
-                    margin: const EdgeInsets.all(10.0),
-                    color: const Color.fromARGB(255, 226, 225, 225),
-                    elevation: 5.0,
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        '등록날짜',
-                        style: TextStyle(
-                          fontSize: 20.0,
+            child: ListView(children: <Widget>[
+          Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  SizedBox(width: Get.width * 0.03),
+                  Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(3.0),
+                          color: const Color.fromARGB(255, 226, 225, 225),
+                          border: Border.all(color: AppColors.black)),
+                      child: Container(
+                        width: Get.width * 0.3,
+                        padding: const EdgeInsets.all(10.0),
+                        child: const Text(
+                          '등록날짜',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                ),
-                Obx(() => Expanded(
-                    child: Container(
-                        decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 226, 225, 225),
-                            border: Border.all(color: AppColors.black)),
-                        child: Container(
-                          padding: const EdgeInsets.all(8.0),
-                          child: FarmingText(
-                              text: controller.focusedDay, size: 14.sp),
-                        )))),
-                SizedBox(width: Get.width / 15)
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                SizedBox(
-                  width: 150,
-                  height: 55,
-                  child: Container(
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(3.0),
-                        side: const BorderSide(
-                          width: 1.0,
-                        ),
-                      ),
-                      margin: const EdgeInsets.all(10.0),
-                      color: const Color.fromARGB(255, 226, 225, 225),
-                      elevation: 5.0,
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
+                      )),
+                  Container(width: Get.width * 0.05),
+                  Obx(() => Expanded(
+                      child: Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3.0),
+                              color: const Color.fromARGB(255, 226, 225, 225),
+                              border: Border.all(color: AppColors.black)),
+                          child: Container(
+                            padding: const EdgeInsets.all(8.0),
+                            child: FarmingText(
+                                text: controller.focusedDay, size: 20.sp),
+                          )))),
+                  SizedBox(width: Get.width * 0.03)
+                ],
+              ),
+              Row(children: <Widget>[SizedBox(height: Get.height * 0.01)]),
+              Row(
+                children: <Widget>[
+                  SizedBox(width: Get.width * 0.03),
+                  Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(3.0),
+                          color: const Color.fromARGB(255, 226, 225, 225),
+                          border: Border.all(color: AppColors.black)),
+                      child: Container(
+                        width: Get.width * 0.3,
+                        padding: const EdgeInsets.all(10.0),
+                        child: const Text(
                           '제목',
                           style: TextStyle(
                             fontSize: 20.0,
                           ),
                           textAlign: TextAlign.center,
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 230,
-                  child: const TextField(
+                      )),
+                  Container(width: Get.width * 0.05),
+                  const Expanded(
+                      child: TextField(
                     keyboardType: TextInputType.multiline,
                     style: TextStyle(fontSize: 20),
                     decoration: InputDecoration(
@@ -115,41 +102,34 @@ class MemoScreen extends GetView<MemoViewModel> {
                         ),
                       ),
                     ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(
-                  width: 150,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(3.0),
-                      side: const BorderSide(
-                        width: 1.0,
-                      ),
-                    ),
-                    margin: const EdgeInsets.all(10.0),
-                    color: const Color.fromARGB(255, 226, 225, 225),
-                    elevation: 5.0,
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        '내용',
-                        style: TextStyle(
-                          fontSize: 20.0,
+                  )),
+                  SizedBox(width: Get.width * 0.03)
+                ],
+              ),
+              Row(children: <Widget>[SizedBox(height: Get.height * 0.01)]),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(width: Get.width * 0.03),
+                  Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(3.0),
+                          color: const Color.fromARGB(255, 226, 225, 225),
+                          border: Border.all(color: AppColors.black)),
+                      child: Container(
+                        width: Get.width * 0.3,
+                        padding: const EdgeInsets.all(10.0),
+                        child: const Text(
+                          '내용',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 230,
-                  width: 230,
-                  child: TextField(
+                      )),
+                  Container(width: Get.width * 0.05),
+                  const Expanded(
+                      child: TextField(
                     keyboardType: TextInputType.multiline,
                     maxLines: 20,
                     minLines: 13,
@@ -162,7 +142,7 @@ class MemoScreen extends GetView<MemoViewModel> {
                           EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       isDense: true,
                       border: OutlineInputBorder(
-                        gapPadding: 10,
+                        gapPadding: 0,
                         borderRadius: BorderRadius.all(Radius.circular(4)),
                         borderSide: BorderSide(
                           width: 1,
@@ -170,45 +150,41 @@ class MemoScreen extends GetView<MemoViewModel> {
                         ),
                       ),
                     ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                SizedBox(
-                  width: 10,
-                  child: Container(),
-                ),
-                SizedBox(
-                  width: 120,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: const Color.fromARGB(255, 216, 200, 155),
-                      textStyle: const TextStyle(fontSize: 20),
-                    ),
-                    onPressed: () {},
-                    child: const Text('저장'),
-                  ),
-                ),
-                SizedBox(
-                  width: 30,
-                  child: Container(),
-                ),
-                SizedBox(
-                  width: 120,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('삭제'),
-                    style: ElevatedButton.styleFrom(
-                      primary: const Color.fromARGB(255, 216, 200, 155),
-                      textStyle: const TextStyle(fontSize: 20.0),
+                  )),
+                  SizedBox(width: Get.width * 0.03)
+                ],
+              ),
+              Row(children: <Widget>[SizedBox(height: Get.height * 0.01)]),
+              Row(
+                children: <Widget>[
+                  SizedBox(width: Get.width * 0.03),
+                  SizedBox(
+                    width: Get.width * 0.3,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: const Color.fromARGB(255, 216, 200, 155),
+                        textStyle: const TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {},
+                      child: const Text('저장'),
                     ),
                   ),
-                ),
-              ],
-            )
-          ],
-        )));
+                  Container(width: Get.width * 0.05),
+                  SizedBox(
+                    width: Get.width * 0.3,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: const Color.fromARGB(255, 216, 200, 155),
+                        textStyle: const TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {},
+                      child: const Text('삭제'),
+                    ),
+                  )
+                ],
+              )
+            ],
+          )
+        ])));
   }
 }
