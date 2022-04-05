@@ -53,6 +53,7 @@ dependencies:
   get_it: ^7.2.0
   shared_preferences: ^2.0.13
   logger: ^1.1.0
+  flutter_downloader: ^1.7.3
 
 
 
