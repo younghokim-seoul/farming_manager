@@ -31,25 +31,36 @@ class ManualScreen extends GetView<ManualViewModel> {
         children: [
           Container(
               padding: const EdgeInsets.all(5),
-              width: MediaQuery.of(context).size.width,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
               child: _menualSelectDropDown()),
           Expanded(
               child: ListView.separated(
                   itemBuilder: (context, index) {
                     final item = controller.categoryQueryList[index];
                     return InkWell(
-                      onTap: () {
-                        //다운로드 코드.
-                        logger.i(item);
-                      },
-                      child: ListTile(
-                        title: FarmingText(text: item.sj, size: 16.sp),
-                        subtitle: FarmingText(
-                          text: item.fileDownUrlInfo,
-                          size: 13.sp,
-                        ),
-                        isThreeLine: true,
-                      ),
+                        onTap: () {
+                          //다운로드 코드.
+                          logger.i(item);
+                        },
+                        child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                FarmingText(text: item.sj, size: 16.sp),
+                                SizedBox(height: 10.h),
+                                Text(item.fileDownUrlInfo,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.blue,
+                                      decoration: TextDecoration.underline,
+                                    ))
+                              ],
+                            ),
+                        )
                     );
                   },
                   separatorBuilder: (context, index) => const Divider(),
@@ -81,15 +92,16 @@ class ManualScreen extends GetView<ManualViewModel> {
         borderRadius: BorderRadius.circular(15),
       ),
       items: controller.categoryList
-          .map((item) => DropdownMenuItem<MenualCategoryResponse>(
-                value: item,
-                child: Text(
-                  item.codeNm,
-                  style: const TextStyle(
-                    fontSize: 14,
-                  ),
-                ),
-              ))
+          .map((item) =>
+          DropdownMenuItem<MenualCategoryResponse>(
+            value: item,
+            child: Text(
+              item.codeNm,
+              style: const TextStyle(
+                fontSize: 14,
+              ),
+            ),
+          ))
           .toList(),
       validator: (value) {
         if (value == null) {
