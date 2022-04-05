@@ -48,7 +48,8 @@ class ManualViewModel extends GetxController {
       logger.i(_localpath);
 
       final taskId = await FlutterDownloader.enqueue(
-        url: task.fileDownUrlInfo + ".hwp",
+        url: task.fileDownUrlInfo,
+        fileName: task.sj +".hwp",
         savedDir: _localpath,
         showNotification: true,
         openFileFromNotification: true,
