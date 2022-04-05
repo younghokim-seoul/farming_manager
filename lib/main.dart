@@ -3,6 +3,7 @@ import 'package:farming_manager/di/app_module.dart';
 import 'package:farming_manager/router/pages.dart';
 import 'package:farming_manager/router/routese.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
@@ -19,6 +20,8 @@ var logger = Logger(
 
 void main() async {
   setupAppModule();
+
+  await FlutterDownloader.initialize(debug: true);
   await initializeDateFormatting().then((value) =>   runApp(const MyApp()));
 
 }

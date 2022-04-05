@@ -54,6 +54,9 @@ dependencies:
   shared_preferences: ^2.0.13
   logger: ^1.1.0
   flutter_downloader: ^1.7.3
+  permission_handler: ^9.2.0
+  device_info_plus: ^3.2.2
+  path_provider: ^2.0.9
 
 
 

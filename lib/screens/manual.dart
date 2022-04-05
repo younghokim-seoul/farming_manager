@@ -44,6 +44,7 @@ class ManualScreen extends GetView<ManualViewModel> {
                         onTap: () {
                           //다운로드 코드.
                           logger.i(item);
+                          controller.requestDownload(item);
                         },
                         child: Padding(
                             padding: const EdgeInsets.all(10),
