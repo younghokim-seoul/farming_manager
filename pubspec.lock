@@ -654,7 +654,7 @@ packages:
     source: hosted
     version: "0.1.0"
   platform:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
       name: platform
       url: "https://pub.dartlang.org"
