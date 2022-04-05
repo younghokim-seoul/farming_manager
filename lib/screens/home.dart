@@ -46,7 +46,7 @@ class HomeScreen extends GetView<HomeViewModel> {
                         child: Obx(() => _buildWeatherIcon(context,controller.currentWeather)),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Obx(() => WeatherDetailSection(wData: controller.currentWeather)),
                   )

@@ -9,6 +9,7 @@ class FarmingText extends StatelessWidget {
   final FontWeight weight;
   final FontStyle fontStyle;
 
+
   const FarmingText(
       {Key? key,
       required this.text,

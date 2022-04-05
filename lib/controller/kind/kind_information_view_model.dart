@@ -5,9 +5,11 @@ import 'package:farming_manager/data/response/king_detail_response.dart';
 import 'package:farming_manager/di/app_module.dart';
 import 'package:farming_manager/main.dart';
 import 'package:farming_manager/widgets/toast.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class KindInformationViewModel extends GetxController {
+  final scrollController = ScrollController().obs;
   final repository = locator.get<FarmingRepository>();
 
   var loading = true.obs;
@@ -20,20 +22,33 @@ class KindInformationViewModel extends GetxController {
 
   List<KindDetailResponse> get categoryDetalList => _categoryDetalList;
 
-   final _selectedItem = Rxn<KindDetailResponse>();
-   KindDetailResponse? get selectedItem =>_selectedItem.value;
+  final _selectedItem = Rxn<KindDetailResponse>();
+
+  KindDetailResponse? get selectedItem => _selectedItem.value;
 
   var pageCursor = 1;
   var queryCursor = "";
+  var loadMore = false;
 
   @override
   void onInit() {
     logger.i(":::::::::KindInformation onInit");
     _fetchKindCategory();
+    _addScrollListener();
     super.onInit();
   }
 
-  void setSelectedItem(KindDetailResponse item){
+  void _addScrollListener() {
+    scrollController.value.addListener(() {
+      if (scrollController.value.position.pixels ==
+              scrollController.value.position.maxScrollExtent &&
+          !loadMore) {
+        fetchKindDetail(queryCursor);
+      }
+    });
+  }
+
+  void setSelectedItem(KindDetailResponse item) {
     _selectedItem.value = item;
   }
 
@@ -52,15 +67,20 @@ class KindInformationViewModel extends GetxController {
   void fetchKindDetail(String query) async {
     if (queryCursor != query) {
       logger.d("::::: 작물 타입 변화로 인한 cursour 초기화");
+      queryCursor = query;
       pageCursor = 1;
+      loadMore = false;
     }
 
-    final response = await repository.getKindDetail(
-        KindDetailRequest(categoryCode: query, pageNo: pageCursor));
+    loadMore = true;
+    final response = await repository.getKindDetail(KindDetailRequest(categoryCode: query, pageNo: pageCursor));
     response.when(success: (response) {
-      _categoryDetalList.value = response;
+      _categoryDetalList.addAll(response);
+      pageCursor += 1;
+      loadMore = false;
     }, error: (error) {
       logger.e("[fetchKindDetail] Api Error -> $error");
+      loadMore = false;
       MessageUtil.showToast("정보를 불러오는데 실패하였습니다");
     });
   }

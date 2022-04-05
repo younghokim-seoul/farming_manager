@@ -18,14 +18,13 @@ class KindInformationScreen extends GetView<KindInformationViewModel> {
 
   @override
   Widget build(BuildContext context) {
-
-      return Obx(() => Scaffold(
-        appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: Colors.transparent,
-            title: const FarmingText(text: "품종 정보", size: 16)),
-        body: _buildBody(context, controller),
-      ));
+    return Obx(() => Scaffold(
+          appBar: AppBar(
+              centerTitle: true,
+              backgroundColor: Colors.transparent,
+              title: const FarmingText(text: "품종 정보", size: 16)),
+          body: _buildBody(context, controller),
+        ));
   }
 
   Widget _buildBody(BuildContext context, KindInformationViewModel viewModel) {
@@ -45,16 +44,17 @@ class KindInformationScreen extends GetView<KindInformationViewModel> {
               SizedBox(
                   width: 130.w,
                   child: ListView.separated(
+                      controller: controller.scrollController.value,
                       itemBuilder: (context, index) {
                         final KindDetailResponse item =
                             controller.categoryDetalList[index];
                         return InkWell(
                           onTap: () {
-                            logger.i(item);
                             controller.setSelectedItem(item);
                           },
                           child: ListTile(
-                              title: FarmingText(text: item.cntntsSj, size: 16)),
+                              title:
+                                  FarmingText(text: item.cntntsSj, size: 16)),
                         );
                       },
                       separatorBuilder: (context, index) => const Divider(),
@@ -69,34 +69,29 @@ class KindInformationScreen extends GetView<KindInformationViewModel> {
 
   Widget _buildSelectedInfo(
       BuildContext context, KindInformationViewModel viewModel) {
-      return Expanded(
-          child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-                border: Border.all(color: AppColors.black, width: 1.w),
-                borderRadius: BorderRadius.circular(8)),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 5,
-              child: FarmingImage(url: viewModel.selectedItem?.imgFileLink,width: MediaQuery.of(context).size.width),
-            ),
+    return Expanded(
+        child: Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+              border: Border.all(color: AppColors.black, width: 1.w),
+              borderRadius: BorderRadius.circular(8)),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height / 5,
+            child: FarmingImage(
+                url: viewModel.selectedItem?.imgFileLink,
+                width: MediaQuery.of(context).size.width),
           ),
-          Expanded(child: AutoSizeText(
-            viewModel.selectedItem?.mainChartrInfo ?? "",
-            textAlign: TextAlign.center,
-            minFontSize: 10,
-            maxLines: 15,
-            style: GoogleFonts.lato(
-                height: 2,
-                fontWeight: FontWeight.normal,
-                fontSize: 14.sp,
-                color: AppColors.black),
-          ),),
-        ],
-      ));
-
+        ),
+        Expanded(
+            child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: FarmingText(text: viewModel.selectedItem?.mainChartrInfo ?? "", size: 16.sp)
+        ))
+      ],
+    ));
   }
 
   Widget _kindSelectDropDown() {

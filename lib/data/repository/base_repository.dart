@@ -34,7 +34,7 @@ abstract class BaseRepository {
       Future<RequestType> call) async {
     try {
       var response = await call;
-      logger.i(response);
+      // logger.i(response);
       return Success(response as ResponseType);
     } catch (exception) {
       logger.e("Api error " + exception.toString());
