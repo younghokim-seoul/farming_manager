@@ -78,8 +78,5 @@
         </provider>
         <!-- End FlutterDownloader customization -->
 
-        <meta-data
-            android:name="vn.hunghd.flutterdownloader.NOTIFICATION_ICON"
-            android:resource="@drawable/launch_background" />
     </application>
 </manifest>
