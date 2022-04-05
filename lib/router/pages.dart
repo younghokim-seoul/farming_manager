@@ -1,14 +1,18 @@
 import 'package:farming_manager/controller/calendar/calendar_binding.dart';
 import 'package:farming_manager/controller/home/home_binding.dart';
 import 'package:farming_manager/controller/kind/kind_information_binding.dart';
+import 'package:farming_manager/controller/manual/manual_binding.dart';
 import 'package:farming_manager/controller/memo/memo_binding.dart';
 import 'package:farming_manager/controller/splash/splash_binding.dart';
 import 'package:farming_manager/router/routese.dart';
 import 'package:farming_manager/screens/home.dart';
 import 'package:farming_manager/screens/kind_information.dart';
+import 'package:farming_manager/screens/manual.dart';
 import 'package:farming_manager/screens/splash.dart';
+import 'package:farming_manager/screens/weekly_farm.dart';
 import 'package:get/get.dart';
 
+import '../controller/weeklyfarm/week_farm_binding.dart';
 import '../screens/calendar.dart';
 import '../screens/memo.dart';
 
@@ -34,5 +38,13 @@ abstract class AppPages {
         name: Routes.MEMO,
         page: () => const MemoScreen(),
         binding: MemoViewBinding()),
+    GetPage(
+        name: Routes.MANUAL,
+        page: () => const ManualScreen(),
+        binding: ManualBinding()),
+    GetPage(
+        name: Routes.WEEKLY_FARM,
+        page: () => const WeeklyFarmScreen(),
+        binding: WeeklyFarmBinding()),
   ];
 }
