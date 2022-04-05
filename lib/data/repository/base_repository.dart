@@ -5,7 +5,8 @@ import 'package:farming_manager/constants/constants.dart';
 import 'package:farming_manager/constants/strings.dart';
 import 'package:farming_manager/data/network/state/result.dart';
 import 'package:farming_manager/data/repository/custom_logger.dart';
-import 'package:fimber/fimber.dart';
+import 'package:farming_manager/main.dart';
+
 
 
 typedef EntityMapper<Entity, Model> = Model Function(Entity entity);
@@ -33,20 +34,20 @@ abstract class BaseRepository {
       Future<RequestType> call) async {
     try {
       var response = await call;
-      Fimber.d("Api success message -> $response");
+      logger.i(response);
       return Success(response as ResponseType);
     } catch (exception) {
-      Fimber.e("Api error " + exception.toString());
+      logger.e("Api error " + exception.toString());
       if (exception is DioError) {
         switch (exception.type) {
           case DioErrorType.connectTimeout:
           case DioErrorType.sendTimeout:
           case DioErrorType.receiveTimeout:
           case DioErrorType.cancel:
-            Fimber.e("Api error message -> ${AppStrings.poorNetworkError}");
+            logger.e("Api error message -> ${AppStrings.poorNetworkError}");
             return Error(AppStrings.poorNetworkError);
           case DioErrorType.other:
-            Fimber.e("Api error message -> ${AppStrings.noNetworkError}");
+            logger.e("Api error message -> ${AppStrings.noNetworkError}");
             return Error(AppStrings.noNetworkError);
           case DioErrorType.response:
             return _getError(exception.response);
@@ -60,7 +61,7 @@ abstract class BaseRepository {
     if (response?.data != null && response?.data is Map<String, dynamic>) {
       if ((response!.data as Map<String, dynamic>)
           .containsKey(ErrorCode.message)) {
-        Fimber.e("Api error response -> ${response.data.toString()}");
+        logger.e("Api error response -> ${response.data.toString()}");
         final errorMessage = response.data[ErrorCode.message];
         return Error(errorMessage);
       }

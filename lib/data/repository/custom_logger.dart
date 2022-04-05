@@ -1,5 +1,6 @@
-import 'package:dio/dio.dart';
 import 'dart:math' as math;
+
+import 'package:dio/dio.dart';
 
 class CustomLogInterceptor extends Interceptor{
   /// Print request [Options]

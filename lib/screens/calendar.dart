@@ -1,14 +1,13 @@
-import 'package:farming_manager/constants/colors.dart';
 import 'package:farming_manager/controller/calendar/calendar_view_model.dart';
 import 'package:farming_manager/router/routese.dart';
 import 'package:farming_manager/utils/utils.dart';
 import 'package:farming_manager/widgets/farming_text.dart';
-import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+import '../main.dart';
 
 class CalendarScreen extends GetView<CalendarViewModel> {
   //
@@ -49,10 +48,11 @@ class CalendarScreen extends GetView<CalendarViewModel> {
           controller.setSelectedDay(selectedDay);
           controller.setFocusedDay(focusedDay);
 
-          var selectedTime = dataTimeToString(controller.focusedDay);
+          logger.i(":::now selectedDay -> " + selectedDay.toString());
+          var selectedTime = dataTimeToString(selectedDay);
           Get.toNamed(Routes.MEMO, arguments: {"EXTRA_DATE": selectedTime});
 
-          Fimber.i(":::now focusedDay -> " + selectedTime);
+          logger.i(":::now focusedDay -> " + selectedTime);
         }
       },
     );

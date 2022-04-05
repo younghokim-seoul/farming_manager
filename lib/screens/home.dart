@@ -5,11 +5,11 @@ import 'package:farming_manager/data/response/weather_response.dart';
 import 'package:farming_manager/models/home/home_category_model.dart';
 import 'package:farming_manager/widgets/menu_section.dart';
 import 'package:farming_manager/widgets/weather_detail_section.dart';
-import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../main.dart';
 import '../utils/utils.dart';
 
 class HomeScreen extends GetView<HomeViewModel> {
@@ -78,7 +78,7 @@ class HomeScreen extends GetView<HomeViewModel> {
           HomeCategoryModel homeCategoryModel = categories[index];
           return GestureDetector(
             onTap: () {
-              Fimber.i("[Click] => " + homeCategoryModel.toJson().toString());
+              logger.i("[Click] => " + homeCategoryModel.toJson().toString());
               Get.toNamed(homeCategoryModel.id);
             },
             child: ItemMenuCard(model: homeCategoryModel),

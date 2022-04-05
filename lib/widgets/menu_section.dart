@@ -30,7 +30,7 @@ class ItemMenuCard extends StatelessWidget {
             model.name,
             maxLines: 1,
             textAlign: TextAlign.center,
-            minFontSize: 0,
+            minFontSize: 12,
             stepGranularity: 0.1,
             style: GoogleFonts.lato(
                 fontWeight: FontWeight.normal,

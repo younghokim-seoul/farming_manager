@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'king_category_response.freezed.dart';
-
 part 'king_category_response.g.dart';
 
 @freezed

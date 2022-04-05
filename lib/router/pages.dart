@@ -1,9 +1,7 @@
-import 'package:farming_manager/constants/keys.dart';
-
-import 'package:farming_manager/controller/memo/memo_binding.dart';
 import 'package:farming_manager/controller/calendar/calendar_binding.dart';
 import 'package:farming_manager/controller/home/home_binding.dart';
 import 'package:farming_manager/controller/kind/kind_information_binding.dart';
+import 'package:farming_manager/controller/memo/memo_binding.dart';
 import 'package:farming_manager/controller/splash/splash_binding.dart';
 import 'package:farming_manager/router/routese.dart';
 import 'package:farming_manager/screens/home.dart';
@@ -11,8 +9,8 @@ import 'package:farming_manager/screens/kind_information.dart';
 import 'package:farming_manager/screens/splash.dart';
 import 'package:get/get.dart';
 
-import '../screens/memo.dart';
 import '../screens/calendar.dart';
+import '../screens/memo.dart';
 
 abstract class AppPages {
   static final pages = [

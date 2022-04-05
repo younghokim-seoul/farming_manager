@@ -1,5 +1,4 @@
 import 'package:farming_manager/data/response/weather_response.dart';
-import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_icons/weather_icons.dart';
 
@@ -13,10 +12,6 @@ class WeatherDetailSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    Fimber.i("wData " + wData.toString());
-
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

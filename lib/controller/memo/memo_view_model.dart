@@ -1,4 +1,4 @@
-import 'package:fimber/fimber.dart';
+
 import 'package:get/get.dart';
 
 class MemoViewModel extends GetxController {
@@ -7,7 +7,6 @@ class MemoViewModel extends GetxController {
 
   @override
   void onInit() {
-    Fimber.i(":::::::::MemoViewModel onInit");
     super.onInit();
   }
 }

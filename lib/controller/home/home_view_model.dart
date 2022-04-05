@@ -2,8 +2,8 @@ import 'package:farming_manager/data/repository/farming_repository.dart';
 import 'package:farming_manager/data/request/weather_request.dart';
 import 'package:farming_manager/data/response/weather_response.dart';
 import 'package:farming_manager/di/app_module.dart';
+import 'package:farming_manager/main.dart';
 import 'package:farming_manager/widgets/toast.dart';
-import 'package:fimber/fimber.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
@@ -24,7 +24,7 @@ class HomeViewModel extends GetxController {
 
   @override
   void onInit() {
-    Fimber.i(":::::::::HomeViewModel onInit " + repository.toString());
+    logger.i(":::::::::HomeViewModel onInit " + repository.toString());
     _getCurrentLocation();
     super.onInit();
   }
@@ -32,21 +32,21 @@ class HomeViewModel extends GetxController {
   Future<void> _getCurrentLocation() async {
     final hasPermission = await _checkPermission();
 
-    Fimber.i("::::hasPermission " + hasPermission.toString());
+    logger.i("::::hasPermission " + hasPermission.toString());
     if (!hasPermission) {
       return;
     }
 
     final position = await _geolocatorPlatform.getCurrentPosition();
-    Fimber.i("::::position " + position.toString());
+    logger.i("::::position " + position.toString());
     final weatherInfo =
         await repository.getWeatherInfo(const WeatherRequest(nx: 56, ny: 124));
 
     weatherInfo.when(success: (response) {
       _currentWeather.value = response;
-      Fimber.i(":::weatherInfo => " + response.toJson().toString());
+      logger.i(":::weatherInfo => " + response.toJson().toString());
     }, error: (error) {
-      Fimber.e("[weatherInfo] Api Error -> $error");
+      logger.e("[weatherInfo] Api Error -> $error");
       MessageUtil.showToast("날씨 정보를 불러오는데 실패하였습니다");
     });
   }
@@ -57,7 +57,7 @@ class HomeViewModel extends GetxController {
 
     serviceEnabled = await _geolocatorPlatform.isLocationServiceEnabled();
 
-    Fimber.i("::::serviceEnabled " + serviceEnabled.toString());
+    logger.i("::::serviceEnabled " + serviceEnabled.toString());
 
     if (!serviceEnabled) {
       return false;

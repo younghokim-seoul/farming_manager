@@ -1,6 +1,8 @@
-import 'package:fimber/fimber.dart';
+
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
+
+import '../main.dart';
 
 enum AniProps { opacity, translateX }
 
@@ -22,7 +24,7 @@ class FadeIn extends StatelessWidget {
               end: const Duration(milliseconds: 500))
           .animate(AniProps.translateX, tween: Tween(begin: 130.0, end: 0.0));
 
-    Fimber.i("duration " + _tween.duration.toString());
+    logger.i("duration " + _tween.duration.toString());
 
     return PlayAnimation<TimelineValue<AniProps>>(
       delay: Duration(milliseconds: (300 * delay).round()),

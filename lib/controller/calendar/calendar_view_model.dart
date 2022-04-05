@@ -1,4 +1,5 @@
-import 'package:fimber/fimber.dart';
+
+import 'package:farming_manager/main.dart';
 import 'package:get/get.dart';
 
 class CalendarViewModel extends GetxController {
@@ -11,7 +12,7 @@ class CalendarViewModel extends GetxController {
 
   @override
   void onInit() {
-    Fimber.i(":::::::::CalendarViewModel onInit");
+    logger.i(":::::::::CalendarViewModel onInit");
     super.onInit();
   }
 

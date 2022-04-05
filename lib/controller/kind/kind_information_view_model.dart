@@ -1,9 +1,10 @@
 import 'package:farming_manager/data/repository/farming_repository.dart';
+import 'package:farming_manager/data/request/kind_detail_request.dart';
 import 'package:farming_manager/data/response/king_category_response.dart';
+import 'package:farming_manager/data/response/king_detail_response.dart';
 import 'package:farming_manager/di/app_module.dart';
+import 'package:farming_manager/main.dart';
 import 'package:farming_manager/widgets/toast.dart';
-import 'package:fimber/fimber.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class KindInformationViewModel extends GetxController {
@@ -11,14 +12,29 @@ class KindInformationViewModel extends GetxController {
 
   var loading = true.obs;
 
-  final _categoryList =  <KindCategoryResponse>[].obs;
+  final _categoryList = <KindCategoryResponse>[].obs;
+
   List<KindCategoryResponse> get categoryList => _categoryList;
+
+  final _categoryDetalList = <KindDetailResponse>[].obs;
+
+  List<KindDetailResponse> get categoryDetalList => _categoryDetalList;
+
+   final _selectedItem = Rxn<KindDetailResponse>();
+   KindDetailResponse? get selectedItem =>_selectedItem.value;
+
+  var pageCursor = 1;
+  var queryCursor = "";
 
   @override
   void onInit() {
-    Fimber.i(":::::::::KindInformation onInit");
+    logger.i(":::::::::KindInformation onInit");
     _fetchKindCategory();
     super.onInit();
+  }
+
+  void setSelectedItem(KindDetailResponse item){
+    _selectedItem.value = item;
   }
 
   void _fetchKindCategory() async {
@@ -27,9 +43,24 @@ class KindInformationViewModel extends GetxController {
     response.when(success: (response) {
       _categoryList.value = response;
       loading.value = false;
-      Fimber.i(":::categoryList => " + _categoryList.toJson().toString());
     }, error: (error) {
-      Fimber.e("[_fetchKindCategory] Api Error -> $error");
+      logger.e("[_fetchKindCategory] Api Error -> $error");
+      MessageUtil.showToast("정보를 불러오는데 실패하였습니다");
+    });
+  }
+
+  void fetchKindDetail(String query) async {
+    if (queryCursor != query) {
+      logger.d("::::: 작물 타입 변화로 인한 cursour 초기화");
+      pageCursor = 1;
+    }
+
+    final response = await repository.getKindDetail(
+        KindDetailRequest(categoryCode: query, pageNo: pageCursor));
+    response.when(success: (response) {
+      _categoryDetalList.value = response;
+    }, error: (error) {
+      logger.e("[fetchKindDetail] Api Error -> $error");
       MessageUtil.showToast("정보를 불러오는데 실패하였습니다");
     });
   }

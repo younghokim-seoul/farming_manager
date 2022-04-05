@@ -1,19 +1,23 @@
 import 'package:farming_manager/constants/app_theme.dart';
-import 'package:farming_manager/controller/splash/splash_binding.dart';
 import 'package:farming_manager/di/app_module.dart';
 import 'package:farming_manager/router/pages.dart';
 import 'package:farming_manager/router/routese.dart';
-import 'package:farming_manager/screens/splash.dart';
-import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:logger/logger.dart';
+
+
+
+//flutter pub run build_runner build
+
+var logger = Logger(
+  printer: PrettyPrinter(methodCount: 1),
+);
 
 void main() async {
-  Fimber.plantTree(DebugTree(useColors: true));
   setupAppModule();
   await initializeDateFormatting().then((value) =>   runApp(const MyApp()));
 
