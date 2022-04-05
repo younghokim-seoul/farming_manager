@@ -67,6 +67,7 @@ class KindInformationViewModel extends GetxController {
   void fetchKindDetail(String query) async {
     if (queryCursor != query) {
       logger.d("::::: 작물 타입 변화로 인한 cursour 초기화");
+      _categoryDetalList.value = [];
       queryCursor = query;
       pageCursor = 1;
       loadMore = false;

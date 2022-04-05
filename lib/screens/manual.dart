@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import '../widgets/farming_text.dart';
 
 class ManualScreen extends GetView<ManualViewModel> {
-
   const ManualScreen({Key? key}) : super(key: key);
 
   @override
@@ -23,7 +22,6 @@ class ManualScreen extends GetView<ManualViewModel> {
     );
   }
 
-
   Widget _buildBody(BuildContext context, ManualViewModel viewModel) {
     if (viewModel.loading.value == true) {
       return const Center(child: CircularProgressIndicator());
@@ -35,11 +33,31 @@ class ManualScreen extends GetView<ManualViewModel> {
               padding: const EdgeInsets.all(5),
               width: MediaQuery.of(context).size.width,
               child: _menualSelectDropDown()),
+          Expanded(
+              child: ListView.separated(
+                  itemBuilder: (context, index) {
+                    final item = controller.categoryQueryList[index];
+                    return InkWell(
+                      onTap: () {
+                        //다운로드 코드.
+                        logger.i(item);
+                      },
+                      child: ListTile(
+                        title: FarmingText(text: item.sj, size: 16.sp),
+                        subtitle: FarmingText(
+                          text: item.fileDownUrlInfo,
+                          size: 13.sp,
+                        ),
+                        isThreeLine: true,
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) => const Divider(),
+                  itemCount: controller.categoryQueryList.length))
         ],
       );
     }
   }
-
 
   Widget _menualSelectDropDown() {
     return DropdownButtonFormField2(
@@ -64,14 +82,14 @@ class ManualScreen extends GetView<ManualViewModel> {
       ),
       items: controller.categoryList
           .map((item) => DropdownMenuItem<MenualCategoryResponse>(
-        value: item,
-        child: Text(
-          item.codeNm,
-          style: const TextStyle(
-            fontSize: 14,
-          ),
-        ),
-      ))
+                value: item,
+                child: Text(
+                  item.codeNm,
+                  style: const TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
+              ))
           .toList(),
       validator: (value) {
         if (value == null) {
@@ -82,6 +100,7 @@ class ManualScreen extends GetView<ManualViewModel> {
         //Do something when changing the item if you want.
         logger.i("clicker s -> " + value.toString());
         final item = value as MenualCategoryResponse;
+        controller.fetchSearchMenualList(item.kidofcomdtySeCode);
       },
       onSaved: (value) {
         // Fimber.i("clicker -> " + value.toString());

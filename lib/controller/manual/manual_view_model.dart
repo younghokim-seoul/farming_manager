@@ -1,6 +1,7 @@
 import 'package:farming_manager/data/repository/farming_repository.dart';
 import 'package:farming_manager/data/request/menual_list_request.dart';
 import 'package:farming_manager/data/response/menual_category_response.dart';
+import 'package:farming_manager/data/response/menual_list_response.dart';
 import 'package:farming_manager/di/app_module.dart';
 import 'package:farming_manager/main.dart';
 import 'package:farming_manager/widgets/toast.dart';
@@ -15,6 +16,10 @@ class ManualViewModel extends GetxController {
   final _categoryList = <MenualCategoryResponse>[].obs;
 
   List<MenualCategoryResponse> get categoryList => _categoryList;
+
+  final _categoryQueryList = <MenualListResponse>[].obs;
+
+  List<MenualListResponse> get categoryQueryList => _categoryQueryList;
 
   @override
   void onInit() {
@@ -42,6 +47,7 @@ class ManualViewModel extends GetxController {
 
     response.when(success: (response) {
        logger.i(response);
+       _categoryQueryList.value = response;
     }, error: (error) {
       logger.e("[fetchSearchMenualList] Api Error -> $error");
       MessageUtil.showToast("정보를 불러오는데 실패하였습니다");
