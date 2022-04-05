@@ -4,6 +4,7 @@ import 'package:farming_manager/data/request/weather_request.dart';
 import 'package:farming_manager/data/response/king_category_response.dart';
 import 'package:farming_manager/data/response/king_detail_response.dart';
 import 'package:farming_manager/data/response/weather_response.dart';
+import 'package:farming_manager/data/response/weekly_farm_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../request/menual_list_request.dart';
@@ -31,4 +32,7 @@ abstract class RetrofitClient {
 
   @POST("/callApi/getMenualList")
   Future<List<MenualListResponse>> getMenualList(@Body() MenualListRequest request);
+
+  @POST("/callApi/getWeekFarmList")
+  Future<List<WeeklyFarmResponse>> getWeekFarmList();
 }

@@ -8,6 +8,7 @@ import 'package:farming_manager/data/response/king_detail_response.dart';
 import 'package:farming_manager/data/response/menual_category_response.dart';
 import 'package:farming_manager/data/response/menual_list_response.dart';
 import 'package:farming_manager/data/response/weather_response.dart';
+import 'package:farming_manager/data/response/weekly_farm_response.dart';
 
 abstract class FarmingRepository extends BaseRepository {
   Future<Result<WeatherResponse>> getWeatherInfo(WeatherRequest request);
@@ -15,4 +16,5 @@ abstract class FarmingRepository extends BaseRepository {
   Future<Result<List<KindDetailResponse>>> getKindDetail(KindDetailRequest request);
   Future<Result<List<MenualCategoryResponse>>> getMenualCategory();
   Future<Result<List<MenualListResponse>>> getMenualList(MenualListRequest request);
+  Future<Result<List<WeeklyFarmResponse>>> getWeekFarmList();
 }

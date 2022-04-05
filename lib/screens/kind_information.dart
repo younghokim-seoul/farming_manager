@@ -87,9 +87,10 @@ class KindInformationScreen extends GetView<KindInformationViewModel> {
         ),
         Expanded(
             child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: FarmingText(text: viewModel.selectedItem?.mainChartrInfo ?? "", size: 16.sp)
-        ))
+                padding: const EdgeInsets.all(20),
+                child: FarmingText(
+                    text: viewModel.selectedItem?.mainChartrInfo ?? "",
+                    size: 16.sp)))
       ],
     ));
   }

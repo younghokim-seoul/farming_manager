@@ -9,6 +9,7 @@ import 'package:farming_manager/data/response/king_detail_response.dart';
 import 'package:farming_manager/data/response/menual_category_response.dart';
 import 'package:farming_manager/data/response/menual_list_response.dart';
 import 'package:farming_manager/data/response/weather_response.dart';
+import 'package:farming_manager/data/response/weekly_farm_response.dart';
 
 class FarmingRepositoryImpl extends FarmingRepository {
   RetrofitClient get _retrofitClient => RetrofitClient(dio, baseUrl: endpoint);
@@ -28,4 +29,7 @@ class FarmingRepositoryImpl extends FarmingRepository {
 
   @override
   Future<Result<List<MenualListResponse>>> getMenualList(MenualListRequest request) async => safeCall(_retrofitClient.getMenualList(request));
+
+  @override
+  Future<Result<List<WeeklyFarmResponse>>> getWeekFarmList() async => safeCall(_retrofitClient.getWeekFarmList());
 }

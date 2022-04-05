@@ -41,13 +41,13 @@ class HomeScreen extends GetView<HomeViewModel> {
                               blurRadius: 8)
                         ]),
                     child: SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height / 3.5,
+                        width: Get.width,
+                        height: Get.height / 3.5,
                         child: Obx(() => _buildWeatherIcon(context,controller.currentWeather)),
                     ),
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width,
+                    width: Get.width,
                     child: Obx(() => WeatherDetailSection(wData: controller.currentWeather)),
                   )
                 ],
