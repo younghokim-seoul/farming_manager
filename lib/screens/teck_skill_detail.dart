@@ -25,12 +25,10 @@ class TeckSkillDetailScreen extends GetView<TeckSkillDetailViewModel> {
       return const Center(child: CircularProgressIndicator());
     } else {
       return Padding(
-          padding:
-              const EdgeInsets.only(top: 20, bottom: 36, right: 20, left: 20),
+          padding: const EdgeInsets.all(20),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
             Container(
-                width: Get.width,
                 padding: const EdgeInsets.all(5),
                 margin: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
@@ -48,8 +46,9 @@ class TeckSkillDetailScreen extends GetView<TeckSkillDetailViewModel> {
                       borderRadius: BorderRadius.circular(8)),
                   child: SingleChildScrollView(
                       padding: const EdgeInsets.all(10),
-                      child:
-                          Html(data: viewModel.selectedDetailItem!.questDtl))),
+                      child: Html(data: viewModel.selectedDetailItem!.questDtl,customRender: {
+
+                      },))),
             ),
             Expanded(
               child: Container(
@@ -59,8 +58,7 @@ class TeckSkillDetailScreen extends GetView<TeckSkillDetailViewModel> {
                       borderRadius: BorderRadius.circular(8)),
                   child: SingleChildScrollView(
                       padding: const EdgeInsets.all(10),
-                      child:
-                          Html(data: viewModel.selectedDetailItem!.answerDtl))),
+                      child: Html(data: viewModel.selectedDetailItem!.answerDtl))),
             ),
           ]));
     }
