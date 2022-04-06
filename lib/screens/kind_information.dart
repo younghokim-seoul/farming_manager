@@ -6,6 +6,7 @@ import 'package:farming_manager/data/response/king_detail_response.dart';
 import 'package:farming_manager/widgets/farming_dropdown.dart';
 import 'package:farming_manager/widgets/farming_image.dart';
 import 'package:farming_manager/widgets/farming_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -46,8 +47,11 @@ class KindInformationScreen extends GetView<KindInformationViewModel> {
                   child: ListView.separated(
                       controller: controller.scrollController.value,
                       itemBuilder: (context, index) {
-                        final KindDetailResponse item =
-                            controller.categoryDetalList[index];
+                        final KindDetailResponse item = controller.categoryDetalList[index];
+
+                        if(index == controller.categoryDetalList.length -1){
+                          return const CupertinoActivityIndicator();
+                        }
                         return InkWell(
                           onTap: () {
                             controller.setSelectedItem(item);
