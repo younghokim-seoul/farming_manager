@@ -6,5 +6,9 @@ abstract class Routes {
   static const MEMO = '/memo';
   static const WEEKLY_FARM = '/weekly_farm';
   static const MANUAL = '/manual';
+  static const DISASTER_PREVNT = '/disaster_prevnt';
+  static const TECK = '/teck';
+  static const VEDIO = '/vedio';
+
 
 }

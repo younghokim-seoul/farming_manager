@@ -11,7 +11,7 @@ _$_TeckResponse _$$_TeckResponseFromJson(Map<String, dynamic> json) =>
       cntntsNo: json['cntntsNo'] as String,
       cntntsSj: json['cntntsSj'] as String,
       regDt: json['regDt'] as String,
-      rdcnt: json['rdcnt'] as int,
+      rdcnt: json['rdcnt'] as String,
     );
 
 Map<String, dynamic> _$$_TeckResponseToJson(_$_TeckResponse instance) =>

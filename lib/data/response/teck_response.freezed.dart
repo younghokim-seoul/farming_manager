@@ -26,7 +26,7 @@ class _$TeckResponseTearOff {
       {required String cntntsNo,
       required String cntntsSj,
       required String regDt,
-      required int rdcnt}) {
+      required String rdcnt}) {
     return _TeckResponse(
       cntntsNo: cntntsNo,
       cntntsSj: cntntsSj,
@@ -48,7 +48,7 @@ mixin _$TeckResponse {
   String get cntntsNo => throw _privateConstructorUsedError;
   String get cntntsSj => throw _privateConstructorUsedError;
   String get regDt => throw _privateConstructorUsedError;
-  int get rdcnt => throw _privateConstructorUsedError;
+  String get rdcnt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -61,7 +61,7 @@ abstract class $TeckResponseCopyWith<$Res> {
   factory $TeckResponseCopyWith(
           TeckResponse value, $Res Function(TeckResponse) then) =
       _$TeckResponseCopyWithImpl<$Res>;
-  $Res call({String cntntsNo, String cntntsSj, String regDt, int rdcnt});
+  $Res call({String cntntsNo, String cntntsSj, String regDt, String rdcnt});
 }
 
 /// @nodoc
@@ -95,7 +95,7 @@ class _$TeckResponseCopyWithImpl<$Res> implements $TeckResponseCopyWith<$Res> {
       rdcnt: rdcnt == freezed
           ? _value.rdcnt
           : rdcnt // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
     ));
   }
 }
@@ -107,7 +107,7 @@ abstract class _$TeckResponseCopyWith<$Res>
           _TeckResponse value, $Res Function(_TeckResponse) then) =
       __$TeckResponseCopyWithImpl<$Res>;
   @override
-  $Res call({String cntntsNo, String cntntsSj, String regDt, int rdcnt});
+  $Res call({String cntntsNo, String cntntsSj, String regDt, String rdcnt});
 }
 
 /// @nodoc
@@ -143,7 +143,7 @@ class __$TeckResponseCopyWithImpl<$Res> extends _$TeckResponseCopyWithImpl<$Res>
       rdcnt: rdcnt == freezed
           ? _value.rdcnt
           : rdcnt // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
     ));
   }
 }
@@ -167,7 +167,7 @@ class _$_TeckResponse implements _TeckResponse {
   @override
   final String regDt;
   @override
-  final int rdcnt;
+  final String rdcnt;
 
   @override
   String toString() {
@@ -209,7 +209,7 @@ abstract class _TeckResponse implements TeckResponse {
       {required String cntntsNo,
       required String cntntsSj,
       required String regDt,
-      required int rdcnt}) = _$_TeckResponse;
+      required String rdcnt}) = _$_TeckResponse;
 
   factory _TeckResponse.fromJson(Map<String, dynamic> json) =
       _$_TeckResponse.fromJson;
@@ -221,7 +221,7 @@ abstract class _TeckResponse implements TeckResponse {
   @override
   String get regDt;
   @override
-  int get rdcnt;
+  String get rdcnt;
   @override
   @JsonKey(ignore: true)
   _$TeckResponseCopyWith<_TeckResponse> get copyWith =>

@@ -10,8 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class KindInformationViewModel extends GetxController {
-  final scrollController = ScrollController().obs;
   final repository = locator.get<FarmingRepository>();
+
+  final scrollController = ScrollController().obs;
 
   var loading = true.obs;
 

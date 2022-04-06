@@ -8,8 +8,8 @@ const List<HomeCategoryModel> categories = [
   HomeCategoryModel(name: "품종정보", id: Routes.KING_INFORMATION),
   HomeCategoryModel(name: "품목별 관리 매뉴얼", id: Routes.MANUAL),
   HomeCategoryModel(name: "주간 농사 정보", id: Routes.WEEKLY_FARM),
-  HomeCategoryModel(name: "농작물재해예장정보", id: Routes.KING_INFORMATION),
-  HomeCategoryModel(name: "현장애로기술사례", id: Routes.KING_INFORMATION),
+  HomeCategoryModel(name: "재해 예방정보", id: Routes.DISASTER_PREVNT),
+  HomeCategoryModel(name: "현장애로기술사례", id: Routes.TECK),
   HomeCategoryModel(name: "농업기술동영상", id: Routes.KING_INFORMATION),
   HomeCategoryModel(name: "미리알림", id: Routes.KING_INFORMATION),
   HomeCategoryModel(name: "달력", id: Routes.CALENDAR)

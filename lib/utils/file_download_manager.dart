@@ -23,30 +23,35 @@ class FileDownLoadManager {
   late Uuid uuid = const Uuid();
 
   void init() {
-    _isLoading = true;
+    _isLoading = false;
     _permissionReady = false;
     _prepare();
     _bindBackgroundIsolate();
     FlutterDownloader.registerCallback(downloadCallback);
   }
 
-  void addDownloadStateCallback({required DownloadTaskStatusCallback callback}) {
+  void addDownloadStateCallback(
+      {required DownloadTaskStatusCallback callback}) {
     _onDownloadStatus = callback;
   }
 
   void requestDownLoad(String url, String fileName) async {
     if (_permissionReady) {
       logger.i("localPath => " + _localPath);
-        final taskId = await FlutterDownloader.enqueue(
-          url: url,
-          fileName:  uuid.v4() +"hwp",
-          savedDir: _localPath,
-          showNotification: true,
-          openFileFromNotification: true,
-          saveInPublicStorage: true, //파일저장을 공개적으로 할것인지
-        );
-        _onDownloadStatus(DownloadTaskStatus.enqueued);
-        logger.d("taskId " + taskId.toString());
+      if(_isLoading){
+        return;
+      }
+      final taskId = await FlutterDownloader.enqueue(
+        url: url,
+        fileName: uuid.v4() + "hwp",
+        savedDir: _localPath,
+        showNotification: true,
+        openFileFromNotification: true,
+        saveInPublicStorage: true, //파일저장을 공개적으로 할것인지
+      );
+      _isLoading = true;
+      _onDownloadStatus(DownloadTaskStatus.enqueued);
+      logger.d("taskId " + taskId.toString());
     }
   }
 
@@ -94,6 +99,10 @@ class FileDownLoadManager {
       String id = data[0];
       DownloadTaskStatus status = data[1];
       int progress = data[2];
+
+      if(status.value == DownloadTaskStatus.complete.value){
+        _isLoading = false;
+      }
       _onDownloadStatus(status);
       // logger.i(id + ", " + status.toString() + "," + progress.toString());
     });
@@ -101,6 +110,7 @@ class FileDownLoadManager {
 
   void _unbindBackgroundIsolate() {
     IsolateNameServer.removePortNameMapping('downloader_send_port');
+    _isLoading = false;
   }
 
   @pragma('vm:entry-point')

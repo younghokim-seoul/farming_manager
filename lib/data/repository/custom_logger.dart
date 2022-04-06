@@ -116,7 +116,7 @@ class CustomLogInterceptor extends Interceptor{
       _printMapAsTable(responseHeaders, header: 'Headers');
     }
 
-    if (!responseBody) {
+    if (responseBody) {
       logPrint('╔ Body');
       logPrint('║');
       _printResponse(response);

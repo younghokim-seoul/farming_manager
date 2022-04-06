@@ -9,7 +9,7 @@ class TeckResponse with _$TeckResponse {
     required String cntntsNo,
     required String cntntsSj,
     required String regDt,
-    required int rdcnt
+    required String rdcnt
   }) = _TeckResponse;
 
   factory TeckResponse.fromJson(Map<String, dynamic> json) =>
