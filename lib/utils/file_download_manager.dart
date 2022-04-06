@@ -7,6 +7,10 @@ import 'package:farming_manager/main.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:uuid/uuid.dart';
+
+//인터페이스 역활 typedef
+typedef DownloadTaskStatusCallback = void Function(DownloadTaskStatus);
 
 class FileDownLoadManager {
   final ReceivePort _port = ReceivePort();
@@ -14,6 +18,9 @@ class FileDownLoadManager {
   late bool _permissionReady;
   late String _localPath;
   late bool _isLoading;
+  late DownloadTaskStatusCallback _onDownloadStatus;
+
+  late Uuid uuid = const Uuid();
 
   void init() {
     _isLoading = true;
@@ -23,18 +30,23 @@ class FileDownLoadManager {
     FlutterDownloader.registerCallback(downloadCallback);
   }
 
+  void addDownloadStateCallback({required DownloadTaskStatusCallback callback}) {
+    _onDownloadStatus = callback;
+  }
+
   void requestDownLoad(String url, String fileName) async {
     if (_permissionReady) {
-      logger.i(_localPath);
-      final taskId = await FlutterDownloader.enqueue(
-        url: url,
-        fileName: fileName + ".hwp",
-        savedDir: _localPath,
-        showNotification: true,
-        openFileFromNotification: true,
-        saveInPublicStorage: true, //파일저장을 공개적으로 할것인지
-      );
-      logger.i(taskId);
+      logger.i("localPath => " + _localPath);
+        final taskId = await FlutterDownloader.enqueue(
+          url: url,
+          fileName:  uuid.v4() +"hwp",
+          savedDir: _localPath,
+          showNotification: true,
+          openFileFromNotification: true,
+          saveInPublicStorage: true, //파일저장을 공개적으로 할것인지
+        );
+        _onDownloadStatus(DownloadTaskStatus.enqueued);
+        logger.d("taskId " + taskId.toString());
     }
   }
 
@@ -82,8 +94,8 @@ class FileDownLoadManager {
       String id = data[0];
       DownloadTaskStatus status = data[1];
       int progress = data[2];
-
-      logger.i(id + ", " + status.toString() + "," + progress.toString());
+      _onDownloadStatus(status);
+      // logger.i(id + ", " + status.toString() + "," + progress.toString());
     });
   }
 

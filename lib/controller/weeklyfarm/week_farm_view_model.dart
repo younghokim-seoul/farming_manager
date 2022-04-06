@@ -1,3 +1,4 @@
+import 'package:farming_manager/constants/strings.dart';
 import 'package:farming_manager/data/repository/farming_repository.dart';
 import 'package:farming_manager/data/response/weekly_farm_response.dart';
 import 'package:farming_manager/di/app_module.dart';
@@ -27,7 +28,7 @@ class WeeklyFarmViewModel extends GetxController {
       _weeklyfarmList.value = response;
     }, error: (error) {
       logger.e("[_fetchWeeklyFarmItems] Api Error -> $error");
-      MessageUtil.showToast("정보를 불러오는데 실패하였습니다");
+      MessageUtil.showToast(AppStrings.httpFail);
     });
   }
 

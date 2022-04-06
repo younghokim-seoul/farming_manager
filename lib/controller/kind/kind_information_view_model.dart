@@ -1,3 +1,4 @@
+import 'package:farming_manager/constants/strings.dart';
 import 'package:farming_manager/data/repository/farming_repository.dart';
 import 'package:farming_manager/data/request/kind_detail_request.dart';
 import 'package:farming_manager/data/response/king_category_response.dart';
@@ -60,7 +61,7 @@ class KindInformationViewModel extends GetxController {
       loading.value = false;
     }, error: (error) {
       logger.e("[_fetchKindCategory] Api Error -> $error");
-      MessageUtil.showToast("정보를 불러오는데 실패하였습니다");
+      MessageUtil.showToast(AppStrings.httpFail);
     });
   }
 
@@ -82,7 +83,7 @@ class KindInformationViewModel extends GetxController {
     }, error: (error) {
       logger.e("[fetchKindDetail] Api Error -> $error");
       loadMore = false;
-      MessageUtil.showToast("정보를 불러오는데 실패하였습니다");
+      MessageUtil.showToast(AppStrings.httpFail);
     });
   }
 }

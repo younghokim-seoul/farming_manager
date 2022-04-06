@@ -1,3 +1,4 @@
+import 'package:farming_manager/constants/strings.dart';
 import 'package:farming_manager/data/repository/farming_repository.dart';
 import 'package:farming_manager/data/request/weather_request.dart';
 import 'package:farming_manager/data/response/weather_response.dart';
@@ -47,7 +48,7 @@ class HomeViewModel extends GetxController {
       logger.i(":::weatherInfo => " + response.toJson().toString());
     }, error: (error) {
       logger.e("[weatherInfo] Api Error -> $error");
-      MessageUtil.showToast("날씨 정보를 불러오는데 실패하였습니다");
+      MessageUtil.showToast(AppStrings.httpFail);
     });
   }
 
