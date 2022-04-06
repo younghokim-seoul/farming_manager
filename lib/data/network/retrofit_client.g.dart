@@ -130,6 +130,26 @@ class _RetrofitClient implements RetrofitClient {
   }
 
   @override
+  Future<List<DstrPrevntListResponse>> getDstrPrevntList(request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request.toJson());
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<DstrPrevntListResponse>>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/callApi/getdstrPrevntList',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) =>
+            DstrPrevntListResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
   Future<List<TeckResponse>> getTeckList(request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
