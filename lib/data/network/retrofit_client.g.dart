@@ -169,19 +169,22 @@ class _RetrofitClient implements RetrofitClient {
   }
 
   @override
-  Future<TeckDetailResponse> getTeckDetail(request) async {
+  Future<List<TeckDetailResponse>> getTeckDetail(request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(request.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<TeckDetailResponse>(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<TeckDetailResponse>>(
             Options(method: 'POST', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/callApi/getTeckDetail',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = TeckDetailResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) =>
+            TeckDetailResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 

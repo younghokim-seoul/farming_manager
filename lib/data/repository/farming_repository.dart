@@ -28,7 +28,7 @@ abstract class FarmingRepository extends BaseRepository {
   Future<Result<List<WeeklyFarmResponse>>> getWeekFarmList();
   Future<Result<List<DstrPrevntListResponse>>> getDstrPrevntList(DstrPrevntListRequest request);
   Future<Result<List<TeckResponse>>> getTeckList(TeckListRequest request);
-  Future<Result<TeckDetailResponse>> getTeckDetail(TeckDetailRequest request);
+  Future<Result<List<TeckDetailResponse>>> getTeckDetail(TeckDetailRequest request);
   Future<Result<List<VedioCategoryResponse>>> getVideoCategory();
   Future<Result<List<VedioListResponse>>> getVideoList(VedioListRequest request);
 }

@@ -43,7 +43,7 @@ class FarmingRepositoryImpl extends FarmingRepository {
   Future<Result<List<WeeklyFarmResponse>>> getWeekFarmList() async => safeCall(_retrofitClient.getWeekFarmList());
 
   @override
-  Future<Result<TeckDetailResponse>> getTeckDetail(TeckDetailRequest request) async => safeCall(_retrofitClient.getTeckDetail(request));
+  Future<Result<List<TeckDetailResponse>>> getTeckDetail(TeckDetailRequest request) async => safeCall(_retrofitClient.getTeckDetail(request));
 
   @override
   Future<Result<List<TeckResponse>>> getTeckList(TeckListRequest request) async => safeCall(_retrofitClient.getTeckList(request));

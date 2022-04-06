@@ -52,7 +52,7 @@ abstract class RetrofitClient {
   Future<List<TeckResponse>> getTeckList(@Body() TeckListRequest request);
 
   @POST("/callApi/getTeckDetail")
-  Future<TeckDetailResponse> getTeckDetail(@Body() TeckDetailRequest request);
+  Future<List<TeckDetailResponse>> getTeckDetail(@Body() TeckDetailRequest request);
 
   @POST("/callApi/getVideoCategory")
   Future<List<VedioCategoryResponse>> getVideoCategory();

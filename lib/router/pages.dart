@@ -6,6 +6,7 @@ import 'package:farming_manager/controller/manual/manual_binding.dart';
 import 'package:farming_manager/controller/memo/memo_binding.dart';
 import 'package:farming_manager/controller/splash/splash_binding.dart';
 import 'package:farming_manager/controller/teck/teck_skill_binding.dart';
+import 'package:farming_manager/controller/teck/teck_skill_detail_binding.dart';
 import 'package:farming_manager/router/routese.dart';
 import 'package:farming_manager/screens/disaster_prevnt.dart';
 import 'package:farming_manager/screens/home.dart';
@@ -13,6 +14,7 @@ import 'package:farming_manager/screens/kind_information.dart';
 import 'package:farming_manager/screens/manual.dart';
 import 'package:farming_manager/screens/splash.dart';
 import 'package:farming_manager/screens/teck_skill.dart';
+import 'package:farming_manager/screens/teck_skill_detail.dart';
 import 'package:farming_manager/screens/weekly_farm.dart';
 import 'package:get/get.dart';
 
@@ -58,5 +60,9 @@ abstract class AppPages {
         name: Routes.DISASTER_PREVNT,
         page: () => const DisasterPrevntScreen(),
         binding: DisasterPrevntBinding()),
+    GetPage(
+        name: Routes.TECK_DETAIL,
+        page: () => const TeckSkillDetailScreen(),
+        binding: TeckSkillDetailBinding()),
   ];
 }

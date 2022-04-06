@@ -8,7 +8,9 @@ abstract class Routes {
   static const MANUAL = '/manual';
   static const DISASTER_PREVNT = '/disaster_prevnt';
   static const TECK = '/teck';
+  static const TECK_DETAIL = '/teck_detail';
   static const VEDIO = '/vedio';
+
 
 
 }

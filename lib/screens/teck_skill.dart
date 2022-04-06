@@ -1,5 +1,6 @@
 import 'package:farming_manager/controller/teck/teck_skill_view_model.dart';
 import 'package:farming_manager/main.dart';
+import 'package:farming_manager/router/routese.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,7 +32,8 @@ class TeckSkillScreen extends GetView<TeckSkillViewModel> {
                 onTap: () {
                   //다운로드 코드.
                   logger.i(item);
-                  // controller.requestDownload(item);
+                  logger.i(item.cntntsNo);
+                  Get.toNamed(Routes.TECK_DETAIL, arguments: {"EXTRA_CNT_NO": item.cntntsNo});
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(15),
@@ -41,7 +43,7 @@ class TeckSkillScreen extends GetView<TeckSkillViewModel> {
                     children: [
                       SizedBox(
                           width: Get.width * 0.6,
-                          child: FarmingText(text: item.cntntsSj, size: 12.sp)),
+                          child: FarmingText(text: item.cntntsSj, size: 13.sp)),
                       SizedBox(
                           width: Get.width * 0.25,
                           child: FarmingText(text: item.regDt, size: 12.sp)),
