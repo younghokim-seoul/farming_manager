@@ -7,47 +7,44 @@ import 'package:farming_manager/main.dart';
 import 'package:farming_manager/widgets/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class DisasterPrevntViewModel extends GetxController {
   final repository = locator.get<FarmingRepository>();
 
-  final scrollController = ScrollController().obs;
 
-  final _disasterPrevntList = <DstrPrevntListResponse>[].obs;
 
-  List<DstrPrevntListResponse> get disasterPrevntList => _disasterPrevntList;
+  static const _pageSize = 10;
 
-  var pageNo = 1;
-  var loadMore = false;
+  final Rx<PagingController<int, DstrPrevntListResponse>> _pagingController =
+      Rx(PagingController(firstPageKey: 1));
+
+  PagingController<int, DstrPrevntListResponse> get pagingController =>
+      _pagingController.value;
 
   @override
   void onInit() {
-    _fetchDstrPrevntItems();
-    _addScrollListener();
+    _pagingController.value.addPageRequestListener((pageKey) {
+      _fetchDstrPrevntItems(pageKey);
+    });
     super.onInit();
   }
 
-  void _addScrollListener() {
-    scrollController.value.addListener(() {
-      if (scrollController.value.position.pixels ==
-          scrollController.value.position.maxScrollExtent &&
-          !loadMore) {
-        _fetchDstrPrevntItems();
-      }
-    });
-  }
-
-  void _fetchDstrPrevntItems() async {
-    loadMore = true;
-    final response = await repository.getDstrPrevntList(DstrPrevntListRequest(pageNo: pageNo));
+  void _fetchDstrPrevntItems(int pageKey) async {
+    final response = await repository.getDstrPrevntList(DstrPrevntListRequest(pageNo: pageKey));
     response.when(success: (response) {
       logger.i(response);
-      _disasterPrevntList.addAll(response);
-      pageNo += 1;
-      loadMore = false;
+      final isLastPage = response.length < _pageSize;
+      if (isLastPage) {
+        _pagingController.value.appendLastPage(response);
+      } else {
+        final nextKey = pageKey += 1;
+        _pagingController.value.appendPage(response, nextKey);
+      }
     }, error: (error) {
       logger.e("[_fetchDstrPrevntItems] Api Error -> $error");
-      loadMore = false;
+      // loadMore = false;
+      _pagingController.value.error = error;
       MessageUtil.showToast(AppStrings.httpFail);
     });
   }

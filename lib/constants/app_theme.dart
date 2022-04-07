@@ -1,15 +1,17 @@
+import 'package:farming_manager/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AppTheme {
   static final ThemeData light = ThemeData(
     primarySwatch: Colors.blue,
-    brightness: Brightness.light,
-    scaffoldBackgroundColor: Colors.white,
     appBarTheme: const AppBarTheme(
-      iconTheme: IconThemeData(
-        color: Colors.black,
-      ),
-      elevation: 0,
-    ),
+        backgroundColor: Colors.transparent,
+        foregroundColor: AppColors.grey, // status bar brightness
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        elevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle.light),
   );
 }
