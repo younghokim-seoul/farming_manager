@@ -28,7 +28,7 @@ abstract class BaseRepository {
 
   Dio get dio => Dio()
     ..options.headers = _headers
-    ..interceptors.add(CustomLogInterceptor());
+    ..interceptors.add(CustomLogInterceptor(responseBody: false));
 
   Future<Result<ResponseType>> safeCall<RequestType, ResponseType>(
       Future<RequestType> call) async {

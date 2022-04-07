@@ -47,4 +47,9 @@ class TeckSkillViewModel extends GetxController {
       MessageUtil.showToast(AppStrings.httpFail);
     });
   }
+  @override
+  void onClose() {
+    _pagingController.value.dispose();
+    super.onClose();
+  }
 }

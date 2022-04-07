@@ -48,4 +48,10 @@ class DisasterPrevntViewModel extends GetxController {
       MessageUtil.showToast(AppStrings.httpFail);
     });
   }
+
+  @override
+  void onClose() {
+    _pagingController.value.dispose();
+    super.onClose();
+  }
 }

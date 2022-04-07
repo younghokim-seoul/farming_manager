@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:farming_manager/constants/colors.dart';
 import 'package:farming_manager/controller/kind/kind_information_view_model.dart';
 import 'package:farming_manager/data/response/king_category_response.dart';
@@ -10,7 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../main.dart';
 
@@ -19,7 +18,8 @@ class KindInformationScreen extends GetView<KindInformationViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Scaffold(
+    return Obx(() =>
+        Scaffold(
           appBar: AppBar(
               centerTitle: true,
               backgroundColor: Colors.transparent,
@@ -37,66 +37,77 @@ class KindInformationScreen extends GetView<KindInformationViewModel> {
         children: [
           Container(
               padding: const EdgeInsets.all(5),
-              width: MediaQuery.of(context).size.width * 0.4.w,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width * 0.4.w,
               child: _kindSelectDropDown()),
           Expanded(
               child: Row(
-            children: [
-              SizedBox(
-                  width: 130.w,
-                  child: ListView.separated(
-                      controller: controller.scrollController.value,
-                      itemBuilder: (context, index) {
-                        final KindDetailResponse item = controller.categoryDetalList[index];
-
-                        if(index == controller.categoryDetalList.length -1){
-                          return const CupertinoActivityIndicator();
-                        }
-                        return InkWell(
-                          onTap: () {
-                            controller.setSelectedItem(item);
-                          },
-                          child: ListTile(
-                              title:
-                                  FarmingText(text: item.cntntsSj, size: 16)),
-                        );
-                      },
-                      separatorBuilder: (context, index) => const Divider(),
-                      itemCount: controller.categoryDetalList.length)),
-              _buildSelectedInfo(context, controller)
-            ],
-          ))
+                children: [
+                  SizedBox(
+                      width: 130.w,
+                      child: PagedListView.separated(
+                        pagingController: controller.pagingController,
+                        builderDelegate: PagedChildBuilderDelegate<KindDetailResponse>(
+                          firstPageProgressIndicatorBuilder: (context) => const Center(),
+                          itemBuilder: (context, item, index) =>
+                              InkWell(
+                                onTap: () {
+                                  controller.setSelectedItem(item);
+                                },
+                                child: ListTile(
+                                    title:
+                                    FarmingText(text: item.cntntsSj, size: 16)),
+                              ),
+                        ),
+                        separatorBuilder: (BuildContext context,
+                            int index) => const Divider(),
+                      )),
+                  _buildSelectedInfo(context, controller)
+                ],
+              ))
         ],
       );
     }
   }
 
-  Widget _buildSelectedInfo(
-      BuildContext context, KindInformationViewModel viewModel) {
+
+  Widget _buildSelectedInfo(BuildContext context,
+      KindInformationViewModel viewModel) {
     return Expanded(
         child: Column(
-      children: [
-        Container(
-          margin: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-              border: Border.all(color: AppColors.black, width: 1.w),
-              borderRadius: BorderRadius.circular(8)),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 5,
-            child: FarmingImage(
-                url: viewModel.selectedItem?.imgFileLink,
-                width: MediaQuery.of(context).size.width),
-          ),
-        ),
-        Expanded(
-            child: SingleChildScrollView(
-                padding: const EdgeInsets.all(20),
-                child: FarmingText(
-                    text: viewModel.selectedItem?.mainChartrInfo ?? "",
-                    size: 16.sp)))
-      ],
-    ));
+          children: [
+            Container(
+              margin: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.black, width: 1.w),
+                  borderRadius: BorderRadius.circular(8)),
+              child: SizedBox(
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height / 5,
+                child: FarmingImage(
+                    url: viewModel.selectedItem?.imgFileLink,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width),
+              ),
+            ),
+            Expanded(
+                child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(20),
+                    child: FarmingText(
+                        text: viewModel.selectedItem?.mainChartrInfo ?? "",
+                        size: 16.sp)))
+          ],
+        ));
   }
 
   Widget _kindSelectDropDown() {
@@ -121,15 +132,16 @@ class KindInformationScreen extends GetView<KindInformationViewModel> {
         borderRadius: BorderRadius.circular(15),
       ),
       items: controller.categoryList
-          .map((item) => DropdownMenuItem<KindCategoryResponse>(
-                value: item,
-                child: Text(
-                  item.categoryNm,
-                  style: const TextStyle(
-                    fontSize: 14,
-                  ),
-                ),
-              ))
+          .map((item) =>
+          DropdownMenuItem<KindCategoryResponse>(
+            value: item,
+            child: Text(
+              item.categoryNm,
+              style: const TextStyle(
+                fontSize: 14,
+              ),
+            ),
+          ))
           .toList(),
       validator: (value) {
         if (value == null) {
