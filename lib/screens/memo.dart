@@ -3,6 +3,7 @@
 import 'package:farming_manager/constants/colors.dart';
 import 'package:farming_manager/controller/memo/memo_view_model.dart';
 import 'package:farming_manager/widgets/farming_text.dart';
+import 'package:farming_manager/widgets/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,8 @@ class MemoScreen extends GetView<MemoViewModel> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController titleCtr = TextEditingController();
+    TextEditingController contentCtr = TextEditingController();
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 224, 230, 178),
         appBar: AppBar(
@@ -23,28 +26,22 @@ class MemoScreen extends GetView<MemoViewModel> {
             backgroundColor: const Color.fromARGB(0, 109, 131, 12),
             title: const FarmingText(text: "메모장", size: 16)),
         body: SafeArea(
-            child: ListView(children: <Widget>[
+            child: ListView(children: [
           Column(
-            children: <Widget>[
+            children: [
               Row(
-                children: <Widget>[
+                children: [
                   SizedBox(width: Get.width * 0.03),
                   Container(
+                      alignment: Alignment.center,
+                      width: Get.width * 0.3,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(3.0),
                           color: const Color.fromARGB(255, 226, 225, 225),
                           border: Border.all(color: AppColors.black)),
                       child: Container(
-                        width: Get.width * 0.3,
-                        padding: const EdgeInsets.all(10.0),
-                        child: const Text(
-                          '등록날짜',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      )),
+                          padding: const EdgeInsets.all(10.0),
+                          child: FarmingText(text: "등록날짜", size: 16.sp))),
                   Container(width: Get.width * 0.05),
                   Obx(() => Expanded(
                       child: Container(
@@ -56,42 +53,37 @@ class MemoScreen extends GetView<MemoViewModel> {
                           child: Container(
                             padding: const EdgeInsets.all(8.0),
                             child: FarmingText(
-                                text: controller.focusedDay, size: 20.sp),
+                                text: controller.focusedDay, size: 16.sp),
                           )))),
                   SizedBox(width: Get.width * 0.03)
                 ],
               ),
-              Row(children: <Widget>[SizedBox(height: Get.height * 0.01)]),
+              SizedBox(height: Get.height * 0.01),
               Row(
-                children: <Widget>[
+                children: [
                   SizedBox(width: Get.width * 0.03),
                   Container(
+                      alignment: Alignment.center,
+                      width: Get.width * 0.3,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(3.0),
                           color: const Color.fromARGB(255, 226, 225, 225),
                           border: Border.all(color: AppColors.black)),
                       child: Container(
-                        width: Get.width * 0.3,
-                        padding: const EdgeInsets.all(10.0),
-                        child: const Text(
-                          '제목',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      )),
+                          padding: const EdgeInsets.all(10.0),
+                          child: FarmingText(text: "제목", size: 16.sp))),
                   Container(width: Get.width * 0.05),
-                  const Expanded(
+                  Expanded(
                       child: TextField(
                     keyboardType: TextInputType.multiline,
-                    style: TextStyle(fontSize: 20),
-                    decoration: InputDecoration(
-                      hintText: '  ',
+                    style: const TextStyle(fontSize: 20),
+                    controller: titleCtr,
+                    decoration: const InputDecoration(
+                      hintText: "",
                       filled: true,
                       fillColor: Color.fromARGB(255, 226, 225, 225),
                       contentPadding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       isDense: true,
                       border: OutlineInputBorder(
                         gapPadding: 0,
@@ -106,36 +98,31 @@ class MemoScreen extends GetView<MemoViewModel> {
                   SizedBox(width: Get.width * 0.03)
                 ],
               ),
-              Row(children: <Widget>[SizedBox(height: Get.height * 0.01)]),
+              SizedBox(height: Get.height * 0.01),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   SizedBox(width: Get.width * 0.03),
                   Container(
+                      alignment: Alignment.center,
+                      width: Get.width * 0.3,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(3.0),
                           color: const Color.fromARGB(255, 226, 225, 225),
                           border: Border.all(color: AppColors.black)),
                       child: Container(
-                        width: Get.width * 0.3,
-                        padding: const EdgeInsets.all(10.0),
-                        child: const Text(
-                          '내용',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      )),
+                          padding: const EdgeInsets.all(10.0),
+                          child: FarmingText(text: "내용", size: 16.sp))),
                   Container(width: Get.width * 0.05),
-                  const Expanded(
+                  Expanded(
                       child: TextField(
                     keyboardType: TextInputType.multiline,
                     maxLines: 20,
                     minLines: 13,
-                    style: TextStyle(fontSize: 20),
-                    decoration: InputDecoration(
-                      hintText: '  ',
+                    controller: contentCtr,
+                    style: const TextStyle(fontSize: 20),
+                    decoration: const InputDecoration(
+                      hintText: "",
                       filled: true,
                       fillColor: Color.fromARGB(255, 226, 225, 225),
                       contentPadding:
@@ -154,7 +141,7 @@ class MemoScreen extends GetView<MemoViewModel> {
                   SizedBox(width: Get.width * 0.03)
                 ],
               ),
-              Row(children: <Widget>[SizedBox(height: Get.height * 0.01)]),
+              SizedBox(height: Get.height * 0.01),
               Row(
                 children: <Widget>[
                   SizedBox(width: Get.width * 0.03),
@@ -165,7 +152,13 @@ class MemoScreen extends GetView<MemoViewModel> {
                         primary: const Color.fromARGB(255, 216, 200, 155),
                         textStyle: const TextStyle(fontSize: 20),
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+                        if(titleCtr.text.isNotEmpty && contentCtr.text.isNotEmpty){
+                           await controller.saveMemo(titleCtr.text, contentCtr.text);
+                        }else{
+                          MessageUtil.showToast("양식을 완성해주세요");
+                        }
+                      },
                       child: const Text('저장'),
                     ),
                   ),

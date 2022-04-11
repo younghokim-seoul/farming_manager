@@ -2,6 +2,9 @@ import 'package:farming_manager/data/network/state/result.dart';
 import 'package:farming_manager/data/repository/base_repository.dart';
 import 'package:farming_manager/data/request/dstr_prevnt_list_request.dart';
 import 'package:farming_manager/data/request/kind_detail_request.dart';
+import 'package:farming_manager/data/request/memo_delete_request.dart';
+import 'package:farming_manager/data/request/memo_list_request.dart';
+import 'package:farming_manager/data/request/memo_save_request.dart';
 import 'package:farming_manager/data/request/menual_list_request.dart';
 import 'package:farming_manager/data/request/teck_detail_request.dart';
 import 'package:farming_manager/data/request/teck_list_request.dart';
@@ -10,8 +13,10 @@ import 'package:farming_manager/data/request/weather_request.dart';
 import 'package:farming_manager/data/response/dstr_prevnt_list_response.dart';
 import 'package:farming_manager/data/response/king_category_response.dart';
 import 'package:farming_manager/data/response/king_detail_response.dart';
+import 'package:farming_manager/data/response/memo_list_response.dart';
 import 'package:farming_manager/data/response/menual_category_response.dart';
 import 'package:farming_manager/data/response/menual_list_response.dart';
+import 'package:farming_manager/data/response/single_response.dart';
 import 'package:farming_manager/data/response/teck_detail_response.dart';
 import 'package:farming_manager/data/response/teck_response.dart';
 import 'package:farming_manager/data/response/vedio_category_response.dart';
@@ -31,4 +36,7 @@ abstract class FarmingRepository extends BaseRepository {
   Future<Result<List<TeckDetailResponse>>> getTeckDetail(TeckDetailRequest request);
   Future<Result<List<VedioCategoryResponse>>> getVideoCategory();
   Future<Result<List<VedioListResponse>>> getVideoList(VedioListRequest request);
+  Future<Result<List<MemoListResponse>>> getMemoList(MemoListRequest request);
+  Future<Result<SingleResponse>> saveMemo(MemoSaveRequest request);
+  Future<Result<SingleResponse>> deleteMemo(MemoDeleteRequest request);
 }

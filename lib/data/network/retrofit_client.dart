@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:farming_manager/data/request/dstr_prevnt_list_request.dart';
 import 'package:farming_manager/data/request/kind_detail_request.dart';
+import 'package:farming_manager/data/request/memo_delete_request.dart';
+import 'package:farming_manager/data/request/memo_list_request.dart';
+import 'package:farming_manager/data/request/memo_save_request.dart';
 import 'package:farming_manager/data/request/teck_detail_request.dart';
 import 'package:farming_manager/data/request/teck_list_request.dart';
 import 'package:farming_manager/data/request/vedio_list_request.dart';
@@ -8,6 +11,8 @@ import 'package:farming_manager/data/request/weather_request.dart';
 import 'package:farming_manager/data/response/dstr_prevnt_list_response.dart';
 import 'package:farming_manager/data/response/king_category_response.dart';
 import 'package:farming_manager/data/response/king_detail_response.dart';
+import 'package:farming_manager/data/response/memo_list_response.dart';
+import 'package:farming_manager/data/response/single_response.dart';
 import 'package:farming_manager/data/response/teck_detail_response.dart';
 import 'package:farming_manager/data/response/teck_response.dart';
 import 'package:farming_manager/data/response/vedio_category_response.dart';
@@ -59,6 +64,17 @@ abstract class RetrofitClient {
 
   @POST("/callApi/getVideoList")
   Future<List<VedioListResponse>> getVideoList(@Body() VedioListRequest request);
+
+
+  @POST("/appApi/getMemoList")
+  Future<List<MemoListResponse>> getMemoList(@Body() MemoListRequest request);
+
+  @POST("/appApi/saveMemo")
+  Future<SingleResponse> saveMemo(@Body() MemoSaveRequest request);
+
+  @POST("/appApi/deleteMemo")
+  Future<SingleResponse> deleteMemo(@Body() MemoDeleteRequest request);
+
 
 
 }
