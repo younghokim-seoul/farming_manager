@@ -12,6 +12,6 @@ class AppTheme {
           color: Colors.black,
         ),
         elevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle.light),
+        systemOverlayStyle: SystemUiOverlayStyle.dark),
   );
 }
