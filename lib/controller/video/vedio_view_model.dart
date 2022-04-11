@@ -1,3 +1,4 @@
+import 'package:chewie/chewie.dart';
 import 'package:farming_manager/constants/strings.dart';
 import 'package:farming_manager/data/repository/farming_repository.dart';
 import 'package:farming_manager/data/request/vedio_list_request.dart';
@@ -8,36 +9,46 @@ import 'package:farming_manager/main.dart';
 import 'package:farming_manager/widgets/toast.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:video_player/video_player.dart';
 
 class VideoViewModel extends GetxController {
   static const _pageSize = 10;
 
   final repository = locator.get<FarmingRepository>();
 
+
   var loading = true.obs;
 
   final _vedioCategoryItems = <VedioCategoryResponse>[].obs;
+
   List<VedioCategoryResponse> get vedioCategoryItems => _vedioCategoryItems;
 
   final Rx<PagingController<int, VedioListResponse>> _pagingController = Rx(PagingController(firstPageKey: 1));
 
   PagingController<int, VedioListResponse> get pagingController => _pagingController.value;
 
+  final _selectedUrl = "".obs;
+
+  String get selectedUrl => _selectedUrl.value;
+
   var pageCursor = 1;
   var queryCursor = "";
-
-
 
   @override
   void onInit() {
     _fetchVedioCategory();
     _pagingController.value.addPageRequestListener((pageKey) {
-      if(queryCursor.isNotEmpty){
+      if (queryCursor.isNotEmpty) {
         pageCursor = pageKey;
         fetchVedioDetail(queryCursor);
       }
     });
     super.onInit();
+  }
+
+
+   selectedVedioItem(VedioListResponse item) {
+     _selectedUrl.value = item.videoLink;
   }
 
   void _fetchVedioCategory() async {
@@ -59,7 +70,8 @@ class VideoViewModel extends GetxController {
       _pagingController.value.refresh();
     }
 
-    final response = await repository.getVideoList(VedioListRequest(categoryCode: queryCursor, pageNo: pageCursor));
+    final response = await repository.getVideoList(
+        VedioListRequest(categoryCode: queryCursor, pageNo: pageCursor));
     response.when(success: (response) {
       final isLastPage = response.length < _pageSize;
       if (isLastPage) {
@@ -74,4 +86,5 @@ class VideoViewModel extends GetxController {
       MessageUtil.showToast(AppStrings.httpFail);
     });
   }
+
 }

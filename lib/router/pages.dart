@@ -68,7 +68,7 @@ abstract class AppPages {
         binding: TeckSkillDetailBinding()),
     GetPage(
         name: Routes.VEDIO,
-        page: () => const VedioScreen(),
+        page: () => VedioScreen(),
         binding: VedioBinding()),
   ];
 }
