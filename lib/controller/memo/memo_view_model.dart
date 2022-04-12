@@ -48,8 +48,6 @@ class MemoViewModel extends GetxController {
   }
 
   Future<void> saveMemo(String title, String content) async {
-    logger.i("::::before focusedDay " + focusedDay);
-
     var reg = RegExp(r"^[가-힣ㄱ-ㅎㅏ-ㅣ]*$");
     String filter = "";
     for (int i = 0; i < focusedDay.length; i++) {
@@ -63,9 +61,6 @@ class MemoViewModel extends GetxController {
     int month = int.parse(split[1]);
     int day = int.parse(split[2]);
 
-
-    logger.i("::::after filter " + filter);
-    logger.i("::::after split " + split.length.toString());
 
     final request = MemoSaveRequest(wYear: year, wMonth: month, wDay: day, title: title, content: content);
     final response = await repository.saveMemo(request);

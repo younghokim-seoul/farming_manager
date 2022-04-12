@@ -173,6 +173,7 @@ class MemoScreen extends GetView<MemoViewModel> {
                         ),
                         onPressed: () async {
                           controller.deleteMemo(controller.focusItem?.memoNo ?? -1);
+
                         },
                         child: const Text('삭제'),
                       ),

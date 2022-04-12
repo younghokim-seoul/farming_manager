@@ -56,32 +56,23 @@ class _CalendarState extends State<CalendarScreen> {
       if (item.isNotEmpty) {
         var result = await Get.toNamed(Routes.MEMO,
             arguments: {"EXTRA_DATE": selectedTime, "EXTRA_ITEM": item[0]});
-        logger.i("::result " + result.toString());
         if (result != null) {
           var type = result as MemoRequestType;
           if (type == MemoRequestType.delete) {
-            logger.i("::삭제시도... " + selectedDay.toString());
             if (kEventSource.containsKey(selectedDay)) {
-              logger.i("::삭제성공... ");
               kEventSource.remove(selectedDay);
             }
-
-            kEventSource.forEach((key, value) {
-              logger.i("::key " + key.toString());
-            });
-
             setState(() {
               events.clear();
               events.addAll(kEventSource);
             });
-          }else{
+          } else {
             fetchMemoItems();
           }
         }
       } else {
         var result = await Get.toNamed(Routes.MEMO,
             arguments: {"EXTRA_DATE": selectedTime});
-        logger.i("::result " + result.toString());
         if (result != null) {
           fetchMemoItems();
         }
@@ -149,17 +140,15 @@ class _CalendarState extends State<CalendarScreen> {
         .getMemoList(MemoListRequest(wYear: year, wMonth: month));
 
     response.when(success: (response) {
-      logger.i(response);
-
       if (response.isNotEmpty) {
         for (var element in response) {
-          kEventSource[DateTime.utc(element.wYear, element.wMonth, element.wDay)] = [element];
+          kEventSource[DateTime.utc(
+              element.wYear, element.wMonth, element.wDay)] = [element];
         }
         setState(() {
           events.addAll(kEventSource);
         });
       }
-      // logger.e("[fetchMemoItems] events -> " + events.length.toString());
     }, error: (error) {
       logger.e("[fetchMemoItems] Api Error -> $error");
     });
