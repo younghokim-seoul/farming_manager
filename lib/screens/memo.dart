@@ -153,9 +153,7 @@ class MemoScreen extends GetView<MemoViewModel> {
                       onPressed: () async {
                         if (controller.titleCtr.value.text.isNotEmpty &&
                             controller.contentCtr.value.text.isNotEmpty) {
-                          await controller.saveMemo(
-                              controller.titleCtr.value.text,
-                              controller.contentCtr.value.text);
+                          controller.saveMemo(controller.titleCtr.value.text, controller.contentCtr.value.text);
                         } else {
                           MessageUtil.showToast("양식을 완성해주세요");
                         }
@@ -173,7 +171,9 @@ class MemoScreen extends GetView<MemoViewModel> {
                           primary: const Color.fromARGB(255, 216, 200, 155),
                           textStyle: const TextStyle(fontSize: 20),
                         ),
-                        onPressed: () {},
+                        onPressed: () async {
+                          controller.deleteMemo(controller.focusItem?.memoNo ?? -1);
+                        },
                         child: const Text('삭제'),
                       ),
                     ),

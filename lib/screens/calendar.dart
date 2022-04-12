@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:farming_manager/controller/memo/memo_view_model.dart';
 import 'package:farming_manager/data/repository/farming_repository.dart';
 import 'package:farming_manager/data/request/memo_list_request.dart';
 import 'package:farming_manager/data/response/memo_list_response.dart';
@@ -26,15 +27,14 @@ class _CalendarState extends State<CalendarScreen> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
 
-  final events = LinkedHashMap<DateTime, List<MemoListResponse>>(equals: isSameDay);
+  final events =
+      LinkedHashMap<DateTime, List<MemoListResponse>>(equals: isSameDay);
 
   Map<DateTime, List<MemoListResponse>> kEventSource = {};
 
   List<MemoListResponse> _getEventsForDay(DateTime day) {
     return events[day] ?? [];
   }
-
-
 
   @override
   void initState() {
@@ -45,26 +45,52 @@ class _CalendarState extends State<CalendarScreen> {
 
   @override
   void dispose() {
-
     super.dispose();
   }
 
-  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) async {
     if (!isSameDay(_selectedDay, selectedDay)) {
       var selectedTime = dataTimeToString(selectedDay);
       var item = _getEventsForDay(selectedDay);
-      logger.i(item);
-      if(item.isNotEmpty){
-        Get.toNamed(Routes.MEMO, arguments: {"EXTRA_DATE": selectedTime,"EXTRA_ITEM" : item[0]});
-      }else{
-        Get.toNamed(Routes.MEMO, arguments: {"EXTRA_DATE": selectedTime});
+
+      if (item.isNotEmpty) {
+        var result = await Get.toNamed(Routes.MEMO,
+            arguments: {"EXTRA_DATE": selectedTime, "EXTRA_ITEM": item[0]});
+        logger.i("::result " + result.toString());
+        if (result != null) {
+          var type = result as MemoRequestType;
+          if (type == MemoRequestType.delete) {
+            logger.i("::삭제시도... " + selectedDay.toString());
+            if (kEventSource.containsKey(selectedDay)) {
+              logger.i("::삭제성공... ");
+              kEventSource.remove(selectedDay);
+            }
+
+            kEventSource.forEach((key, value) {
+              logger.i("::key " + key.toString());
+            });
+
+            setState(() {
+              events.clear();
+              events.addAll(kEventSource);
+            });
+          }else{
+            fetchMemoItems();
+          }
+        }
+      } else {
+        var result = await Get.toNamed(Routes.MEMO,
+            arguments: {"EXTRA_DATE": selectedTime});
+        logger.i("::result " + result.toString());
+        if (result != null) {
+          fetchMemoItems();
+        }
       }
 
       setState(() {
         _selectedDay = selectedDay;
         _focusedDay = focusedDay;
       });
-
     }
   }
 
@@ -90,14 +116,15 @@ class _CalendarState extends State<CalendarScreen> {
       calendarFormat: CalendarFormat.month,
       calendarBuilders: _calendarBuilder(),
       headerVisible: true,
-      headerStyle: const HeaderStyle(formatButtonVisible: false, titleCentered: true),
+      headerStyle:
+          const HeaderStyle(formatButtonVisible: false, titleCentered: true),
       selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
       onDaySelected: _onDaySelected,
       eventLoader: _getEventsForDay,
-        onPageChanged: (focusedDay) {
-          _focusedDay = focusedDay;
-          fetchMemoItems();
-        },
+      onPageChanged: (focusedDay) {
+        _focusedDay = focusedDay;
+        fetchMemoItems();
+      },
     );
   }
 
@@ -118,16 +145,16 @@ class _CalendarState extends State<CalendarScreen> {
   void fetchMemoItems() async {
     int year = _focusedDay.year;
     int month = _focusedDay.month;
-    final response = await repository.getMemoList(MemoListRequest(wYear: year, wMonth: month));
+    final response = await repository
+        .getMemoList(MemoListRequest(wYear: year, wMonth: month));
 
     response.when(success: (response) {
-      // logger.i(response);
+      logger.i(response);
 
-      if(response.isNotEmpty){
+      if (response.isNotEmpty) {
         for (var element in response) {
-          kEventSource[DateTime(element.wYear,element.wMonth,element.wDay)] = [element];
+          kEventSource[DateTime.utc(element.wYear, element.wMonth, element.wDay)] = [element];
         }
-
         setState(() {
           events.addAll(kEventSource);
         });
@@ -137,5 +164,4 @@ class _CalendarState extends State<CalendarScreen> {
       logger.e("[fetchMemoItems] Api Error -> $error");
     });
   }
-
 }

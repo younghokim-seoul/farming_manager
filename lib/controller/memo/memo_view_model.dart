@@ -1,10 +1,13 @@
 import 'package:farming_manager/data/repository/farming_repository.dart';
+import 'package:farming_manager/data/request/memo_delete_request.dart';
 import 'package:farming_manager/data/request/memo_save_request.dart';
 import 'package:farming_manager/data/response/memo_list_response.dart';
 import 'package:farming_manager/di/app_module.dart';
 import 'package:farming_manager/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+enum MemoRequestType { save, delete }
 
 class MemoViewModel extends GetxController {
   final repository = locator.get<FarmingRepository>();
@@ -26,10 +29,22 @@ class MemoViewModel extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    logger.d(focusItem);
     isMemoWrite.value = focusItem != null;
     titleCtr.value.text = focusItem?.title ?? "";
     contentCtr.value.text = focusItem?.content ?? "";
+  }
+
+  Future<void> deleteMemo(int memoNo) async {
+
+    final request = MemoDeleteRequest(memoNo: memoNo);
+    final response = await repository.deleteMemo(request);
+
+    response.when(success: (response) {
+      logger.i(response);
+      Get.back(result: MemoRequestType.delete);
+    }, error: (error) {
+      logger.e("[deleteMemo] Api Error -> $error");
+    });
   }
 
   Future<void> saveMemo(String title, String content) async {
@@ -58,12 +73,10 @@ class MemoViewModel extends GetxController {
 
     response.when(success: (response) {
       logger.i(response);
-      Get.back();
+      Get.back(result: MemoRequestType.save);
     }, error: (error) {
       logger.e("[saveMemo] Api Error -> $error");
     });
-
-
 
   }
 }
