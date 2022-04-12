@@ -52,7 +52,14 @@ class _CalendarState extends State<CalendarScreen> {
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     if (!isSameDay(_selectedDay, selectedDay)) {
       var selectedTime = dataTimeToString(selectedDay);
-      Get.toNamed(Routes.MEMO, arguments: {"EXTRA_DATE": selectedTime});
+      var item = _getEventsForDay(selectedDay);
+      logger.i(item);
+      if(item.isNotEmpty){
+        Get.toNamed(Routes.MEMO, arguments: {"EXTRA_DATE": selectedTime,"EXTRA_ITEM" : item[0]});
+      }else{
+        Get.toNamed(Routes.MEMO, arguments: {"EXTRA_DATE": selectedTime});
+      }
+
       setState(() {
         _selectedDay = selectedDay;
         _focusedDay = focusedDay;

@@ -17,8 +17,6 @@ class MemoScreen extends GetView<MemoViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController titleCtr = TextEditingController();
-    TextEditingController contentCtr = TextEditingController();
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 224, 230, 178),
         appBar: AppBar(
@@ -77,7 +75,7 @@ class MemoScreen extends GetView<MemoViewModel> {
                       child: TextField(
                     keyboardType: TextInputType.multiline,
                     style: const TextStyle(fontSize: 20),
-                    controller: titleCtr,
+                    controller: controller.titleCtr.value,
                     decoration: const InputDecoration(
                       hintText: "",
                       filled: true,
@@ -119,7 +117,7 @@ class MemoScreen extends GetView<MemoViewModel> {
                     keyboardType: TextInputType.multiline,
                     maxLines: 20,
                     minLines: 13,
-                    controller: contentCtr,
+                    controller: controller.contentCtr.value,
                     style: const TextStyle(fontSize: 20),
                     decoration: const InputDecoration(
                       hintText: "",
@@ -153,9 +151,12 @@ class MemoScreen extends GetView<MemoViewModel> {
                         textStyle: const TextStyle(fontSize: 20),
                       ),
                       onPressed: () async {
-                        if(titleCtr.text.isNotEmpty && contentCtr.text.isNotEmpty){
-                           await controller.saveMemo(titleCtr.text, contentCtr.text);
-                        }else{
+                        if (controller.titleCtr.value.text.isNotEmpty &&
+                            controller.contentCtr.value.text.isNotEmpty) {
+                          await controller.saveMemo(
+                              controller.titleCtr.value.text,
+                              controller.contentCtr.value.text);
+                        } else {
                           MessageUtil.showToast("양식을 완성해주세요");
                         }
                       },
@@ -163,15 +164,18 @@ class MemoScreen extends GetView<MemoViewModel> {
                     ),
                   ),
                   Container(width: Get.width * 0.05),
-                  SizedBox(
-                    width: Get.width * 0.3,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: const Color.fromARGB(255, 216, 200, 155),
-                        textStyle: const TextStyle(fontSize: 20),
+                  Visibility(
+                    visible: controller.isMemoWrite.value,
+                    child: SizedBox(
+                      width: Get.width * 0.3,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color.fromARGB(255, 216, 200, 155),
+                          textStyle: const TextStyle(fontSize: 20),
+                        ),
+                        onPressed: () {},
+                        child: const Text('삭제'),
                       ),
-                      onPressed: () {},
-                      child: const Text('삭제'),
                     ),
                   ),
                   SizedBox(width: Get.width * 0.3)
