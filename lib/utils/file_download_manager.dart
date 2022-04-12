@@ -30,8 +30,7 @@ class FileDownLoadManager {
     FlutterDownloader.registerCallback(downloadCallback);
   }
 
-  void addDownloadStateCallback(
-      {required DownloadTaskStatusCallback callback}) {
+  void addDownloadStateCallback({required DownloadTaskStatusCallback callback}) {
     _onDownloadStatus = callback;
   }
 

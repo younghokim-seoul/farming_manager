@@ -6,7 +6,7 @@ class SplashViewModel extends GetxController {
 
   @override
   void onInit() {
-    logger.i(":::::::::SplashViewModel onInit");
+    logger.i(":::::::::SplashViewModel onInit ");
     _setInitialScreen();
     super.onInit();
   }

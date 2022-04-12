@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "126090194086",
+    "project_id": "farming-manager",
+    "storage_bucket": "farming-manager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126090194086:android:643c8ee1a265fb6892d867",
+        "android_client_info": {
+          "package_name": "com.cm.farming_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "126090194086-cdb0llmbemt5eeiiqu7qaffnl9v6g4q3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYOBCeDSSiE7lRcQ88F-vVQmZOwoRoPPs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "126090194086-cdb0llmbemt5eeiiqu7qaffnl9v6g4q3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "126090194086-n4e1ac4036ump3er7bjc69ejbs950gjj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cm.farming-manager"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

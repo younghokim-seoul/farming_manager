@@ -1,4 +1,3 @@
-import 'package:chewie/chewie.dart';
 import 'package:farming_manager/constants/strings.dart';
 import 'package:farming_manager/data/repository/farming_repository.dart';
 import 'package:farming_manager/data/request/vedio_list_request.dart';
@@ -6,16 +5,15 @@ import 'package:farming_manager/data/response/vedio_category_response.dart';
 import 'package:farming_manager/data/response/vedio_list_response.dart';
 import 'package:farming_manager/di/app_module.dart';
 import 'package:farming_manager/main.dart';
+import 'package:farming_manager/utils/local_preference_manager.dart';
 import 'package:farming_manager/widgets/toast.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:video_player/video_player.dart';
 
 class VideoViewModel extends GetxController {
   static const _pageSize = 10;
 
   final repository = locator.get<FarmingRepository>();
-
 
   var loading = true.obs;
 
@@ -25,9 +23,11 @@ class VideoViewModel extends GetxController {
 
   List<VedioCategoryResponse> get vedioCategoryItems => _vedioCategoryItems;
 
-  final Rx<PagingController<int, VedioListResponse>> _pagingController = Rx(PagingController(firstPageKey: 1));
+  final Rx<PagingController<int, VedioListResponse>> _pagingController =
+      Rx(PagingController(firstPageKey: 1));
 
-  PagingController<int, VedioListResponse> get pagingController => _pagingController.value;
+  PagingController<int, VedioListResponse> get pagingController =>
+      _pagingController.value;
 
   final _selectedUrl = "".obs;
 
@@ -36,8 +36,10 @@ class VideoViewModel extends GetxController {
   var pageCursor = 1;
   var queryCursor = "";
 
+
+
   @override
-  void onInit() {
+  void onInit() async {
     _fetchVedioCategory();
     _pagingController.value.addPageRequestListener((pageKey) {
       if (queryCursor.isNotEmpty) {
@@ -45,12 +47,15 @@ class VideoViewModel extends GetxController {
         fetchVedioDetail(queryCursor);
       }
     });
+    await LocalPreferenceManager.putToken("asdsadasd").then((value) =>
+        LocalPreferenceManager.getToken().then((value) => logger.i(":::테스트 " + value.toString())));
     super.onInit();
+
+
   }
 
-
-   selectedVedioItem(VedioListResponse item) {
-     _selectedUrl.value = item.videoLink;
+  selectedVedioItem(VedioListResponse item) {
+    _selectedUrl.value = item.videoLink;
   }
 
   void _fetchVedioCategory() async {
@@ -88,5 +93,4 @@ class VideoViewModel extends GetxController {
       MessageUtil.showToast(AppStrings.httpFail);
     });
   }
-
 }
