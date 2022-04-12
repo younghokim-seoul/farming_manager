@@ -48,41 +48,42 @@ class VedioScreen extends GetView<VideoViewModel> {
     if (viewModel.selectedUrl.isNotEmpty) {
       return SizedBox(
           height: Get.height * 0.4,
-          child: InAppWebView(
-            key: webViewKey,
-            initialUrlRequest:
-                URLRequest(url: Uri.parse(viewModel.selectedUrl)),
-            initialOptions: options,
-            onWebViewCreated: (controller) {
-              webViewController = controller;
-              logger.i("::::onWebViewCreated>>>>");
-            },
-            androidOnPermissionRequest: (controller, origin, resources) async {
-              return PermissionRequestResponse(
-                  resources: resources,
-                  action: PermissionRequestResponseAction.GRANT);
-            },
-            shouldOverrideUrlLoading: (controller, navigationAction) async {
-              logger.i("::::shouldOverrideUrlLoading>>>>");
-              return NavigationActionPolicy.ALLOW;
-            },
-            onLoadStart: (controller, url) {
-              logger.i("::::onLoadStart " + url.toString());
-            },
-            onLoadStop: (controller, url) async {
-              logger.i("::::onLoadStop " + url.toString());
-            },
-            onLoadError: (controller, url, code, message) {
-              logger.i(
-                  "::::onLoadError " + url.toString() + " message " + message);
-            },
-            onProgressChanged: (controller, progress) {
-              // logger.i("::::onProgressChanged " + progress.toString());
-            },
-            onConsoleMessage: (controller, consoleMessage) {
-              print(consoleMessage);
-            },
-          ),);
+          child: Stack(
+            children: [
+              InAppWebView(
+                key: webViewKey,
+                initialUrlRequest:
+                    URLRequest(url: Uri.parse(viewModel.selectedUrl)),
+                initialOptions: options,
+                onWebViewCreated: (controller) {
+                  webViewController = controller;
+                },
+                androidOnPermissionRequest:
+                    (controller, origin, resources) async {
+                  return PermissionRequestResponse(
+                      resources: resources,
+                      action: PermissionRequestResponseAction.GRANT);
+                },
+                shouldOverrideUrlLoading: (controller, navigationAction) async {
+                  return NavigationActionPolicy.ALLOW;
+                },
+                onLoadStart: (controller, url) {
+                },
+                onLoadStop: (controller, url) async {
+                  viewModel.progressWebRendering.value = false;
+                },
+                onLoadError: (controller, url, code, message) {
+                  viewModel.progressWebRendering.value = false;
+                },
+                onConsoleMessage: (controller, consoleMessage) {
+                  print(consoleMessage);
+                },
+              ),
+              Visibility(
+                  visible: viewModel.progressWebRendering.value,
+                  child: const Center(child: CircularProgressIndicator())),
+            ],
+          ));
     } else {
       return Container();
     }
@@ -104,7 +105,7 @@ class VedioScreen extends GetView<VideoViewModel> {
               firstPageProgressIndicatorBuilder: (context) => const Center(),
               itemBuilder: (context, item, index) => InkWell(
                 onTap: () {
-                  logger.i(item);
+                  viewModel.progressWebRendering.value = true;
                   webViewController?.loadUrl(urlRequest: URLRequest(url: Uri.parse(item.videoLink)));
                   viewModel.selectedVedioItem(item);
                 },

@@ -19,6 +19,8 @@ class VideoViewModel extends GetxController {
 
   var loading = true.obs;
 
+  var progressWebRendering = false.obs;
+
   final _vedioCategoryItems = <VedioCategoryResponse>[].obs;
 
   List<VedioCategoryResponse> get vedioCategoryItems => _vedioCategoryItems;
