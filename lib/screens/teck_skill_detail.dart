@@ -29,6 +29,7 @@ class TeckSkillDetailScreen extends GetView<TeckSkillDetailViewModel> {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
             Container(
+               width: Get.width,
                 padding: const EdgeInsets.all(5),
                 margin: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
