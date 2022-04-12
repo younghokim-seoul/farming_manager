@@ -18,7 +18,7 @@ const List<HomeCategoryModel> categories = [
 
 final kToday = DateTime.now();
 final kFirstDay = DateTime(kToday.year, kToday.month - 3, kToday.day);
-final kLastDay = DateTime(kToday.year, kToday.month + 3, kToday.day);
+final kLastDay = DateTime(kToday.year + 1, kToday.month, kToday.day);
 
 String dataTimeToString(DateTime epoch) {
   return DateFormat('yyyy년 M월 d일', 'ko').format(epoch);

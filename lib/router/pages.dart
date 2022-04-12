@@ -1,4 +1,3 @@
-import 'package:farming_manager/controller/calendar/calendar_binding.dart';
 import 'package:farming_manager/controller/dstrprevnt/disaster_prevnt_binding.dart';
 import 'package:farming_manager/controller/home/home_binding.dart';
 import 'package:farming_manager/controller/kind/kind_information_binding.dart';
@@ -9,6 +8,7 @@ import 'package:farming_manager/controller/teck/teck_skill_binding.dart';
 import 'package:farming_manager/controller/teck/teck_skill_detail_binding.dart';
 import 'package:farming_manager/controller/video/vedio_binding.dart';
 import 'package:farming_manager/router/routese.dart';
+import 'package:farming_manager/screens/calendar.dart';
 import 'package:farming_manager/screens/disaster_prevnt.dart';
 import 'package:farming_manager/screens/home.dart';
 import 'package:farming_manager/screens/kind_information.dart';
@@ -38,10 +38,7 @@ abstract class AppPages {
         name: Routes.KING_INFORMATION,
         page: () => const KindInformationScreen(),
         binding: KindInformationBinding()),
-    GetPage(
-        name: Routes.CALENDAR,
-        page: () => const CalendarScreen(),
-        binding: CalendarViewBinding()),
+    GetPage(name: Routes.CALENDAR, page: () => const CalendarScreen()),
     GetPage(
         name: Routes.MEMO,
         page: () => const MemoScreen(),
@@ -67,8 +64,6 @@ abstract class AppPages {
         page: () => const TeckSkillDetailScreen(),
         binding: TeckSkillDetailBinding()),
     GetPage(
-        name: Routes.VEDIO,
-        page: () => VedioScreen(),
-        binding: VedioBinding()),
+        name: Routes.VEDIO, page: () => VedioScreen(), binding: VedioBinding()),
   ];
 }

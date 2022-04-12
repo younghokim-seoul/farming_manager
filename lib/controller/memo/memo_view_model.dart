@@ -1,5 +1,4 @@
 import 'package:farming_manager/data/repository/farming_repository.dart';
-import 'package:farming_manager/data/repository/farming_repository_remote.dart';
 import 'package:farming_manager/data/request/memo_save_request.dart';
 import 'package:farming_manager/di/app_module.dart';
 import 'package:farming_manager/main.dart';
@@ -12,6 +11,9 @@ class MemoViewModel extends GetxController {
 
   String get focusedDay => _focusedDay.value;
 
+
+
+
   @override
   void onInit() {
     super.onInit();
@@ -19,6 +21,7 @@ class MemoViewModel extends GetxController {
 
   Future<void> saveMemo(String title, String content) async {
     logger.i("::::before focusedDay " + focusedDay);
+
     var reg = RegExp(r"^[가-힣ㄱ-ㅎㅏ-ㅣ]*$");
     String filter = "";
     for (int i = 0; i < focusedDay.length; i++) {
@@ -42,6 +45,7 @@ class MemoViewModel extends GetxController {
 
     response.when(success: (response) {
       logger.i(response);
+      Get.back();
     }, error: (error) {
       logger.e("[saveMemo] Api Error -> $error");
     });
