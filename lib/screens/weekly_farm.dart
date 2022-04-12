@@ -25,7 +25,7 @@ class WeeklyFarmScreen extends GetView<WeeklyFarmViewModel> {
                         onTap: () {
                           //다운로드 코드.
                           logger.i(item);
-                          // controller.requestDownload(item);
+                          controller.requestDownload(item);
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(10),

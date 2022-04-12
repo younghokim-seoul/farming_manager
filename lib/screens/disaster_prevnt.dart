@@ -25,6 +25,7 @@ class DisasterPrevntScreen extends GetView<DisasterPrevntViewModel> {
                 itemBuilder: (context, item, index) => InkWell(
                     onTap: () {
                       logger.i(item);
+                      controller.requestDownload(item);
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(10),

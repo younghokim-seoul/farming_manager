@@ -43,7 +43,7 @@ class FileDownLoadManager {
       }
       final taskId = await FlutterDownloader.enqueue(
         url: url,
-        fileName: uuid.v4() + "hwp",
+        fileName: uuid.v4() + ".hwp",
         savedDir: _localPath,
         showNotification: true,
         openFileFromNotification: true,
