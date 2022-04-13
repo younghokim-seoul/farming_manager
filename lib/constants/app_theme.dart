@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 class AppTheme {
   static final ThemeData light = ThemeData(
     primarySwatch: Colors.blue,
+    scaffoldBackgroundColor: AppColors.white,
     appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         foregroundColor: AppColors.grey, // status bar brightness

@@ -3,11 +3,8 @@
 import 'package:farming_manager/constants/colors.dart';
 import 'package:farming_manager/constants/strings.dart';
 import 'package:farming_manager/controller/alarm/alarm_view_model.dart';
-import 'package:farming_manager/controller/memo/memo_view_model.dart';
-import 'package:farming_manager/main.dart';
 import 'package:farming_manager/utils/utils.dart';
 import 'package:farming_manager/widgets/farming_text.dart';
-import 'package:farming_manager/widgets/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -223,6 +220,7 @@ class AlarmScreen extends GetView<AlarmViewModel> {
                 ],
               ),
             ),
+            SizedBox(height : Get.height * 0.03),
             Container(
                 width: Get.width,
                 padding: const EdgeInsets.all(5),

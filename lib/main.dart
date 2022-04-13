@@ -2,6 +2,7 @@ import 'package:farming_manager/constants/app_theme.dart';
 import 'package:farming_manager/di/app_module.dart';
 import 'package:farming_manager/router/pages.dart';
 import 'package:farming_manager/router/routese.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -19,7 +20,8 @@ var logger = Logger(
 
 void main() async {
   setupAppModule();
-
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await FlutterDownloader.initialize(debug: true);
   await initializeDateFormatting().then((value) => runApp(const MyApp()));
 }
