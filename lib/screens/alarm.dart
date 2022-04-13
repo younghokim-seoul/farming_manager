@@ -3,6 +3,7 @@
 import 'package:farming_manager/constants/colors.dart';
 import 'package:farming_manager/controller/alarm/alarm_view_model.dart';
 import 'package:farming_manager/controller/memo/memo_view_model.dart';
+import 'package:farming_manager/main.dart';
 import 'package:farming_manager/widgets/farming_text.dart';
 import 'package:farming_manager/widgets/toast.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class AlarmScreen extends GetView<AlarmViewModel> {
-
-
   AlarmScreen({Key? key}) : super(key: key);
 
   var titleEditingController = TextEditingController();
@@ -129,16 +128,33 @@ class AlarmScreen extends GetView<AlarmViewModel> {
                         child: FarmingText(text: "등록날짜", size: 16.sp))),
                 Container(width: Get.width * 0.05),
                 Expanded(
-                    child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(3.0),
-                            color: const Color.fromARGB(255, 226, 225, 225),
-                            border: Border.all(color: AppColors.black)),
+                    child: InkWell(
+                        onTap: () {
+                          Future<DateTime?> selectedDate = showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(DateTime.now().year,
+                                  DateTime.now().month - 3, DateTime.now().day),
+                              lastDate: DateTime(DateTime.now().year,
+                                  DateTime.now().month + 3, DateTime.now().day),
+                              builder: (BuildContext context, Widget? child) {
+                                return Theme(
+                                  data: ThemeData.light(),
+                                  child: child!,
+                                );
+                              });
+                          selectedDate.then((value) => logger.i(value));
+                        },
                         child: Container(
-                          padding: const EdgeInsets.all(8.0),
-                          child: FarmingText(text: "", size: 16.sp),
-                        ))),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(3.0),
+                                color: const Color.fromARGB(255, 226, 225, 225),
+                                border: Border.all(color: AppColors.black)),
+                            child: Container(
+                              padding: const EdgeInsets.all(8.0),
+                              child: FarmingText(text: "", size: 16.sp),
+                            )))),
                 SizedBox(width: Get.width * 0.03)
               ],
             ),
