@@ -13,4 +13,9 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class AlarmViewModel extends GetxController {
   final repository = locator.get<FarmingRepository>();
+
+  final _focusedDay = Rxn<DateTime>();
+  DateTime? get focusedDay => _focusedDay.value;
+
+  void setFocusDay(DateTime dateTime) => _focusedDay.value = dateTime;
 }
