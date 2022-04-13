@@ -4,6 +4,6 @@ import 'package:get/get.dart';
 class AlarmBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => AlarmViewModel());
+    Get.put(AlarmViewModel());
   }
 }

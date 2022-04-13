@@ -1,5 +1,6 @@
 import 'package:farming_manager/data/network/state/result.dart';
 import 'package:farming_manager/data/repository/base_repository.dart';
+import 'package:farming_manager/data/request/alarm_save_request.dart';
 import 'package:farming_manager/data/request/dstr_prevnt_list_request.dart';
 import 'package:farming_manager/data/request/kind_detail_request.dart';
 import 'package:farming_manager/data/request/memo_delete_request.dart';
@@ -39,4 +40,5 @@ abstract class FarmingRepository extends BaseRepository {
   Future<Result<List<MemoListResponse>>> getMemoList(MemoListRequest request);
   Future<Result<SingleResponse>> saveMemo(MemoSaveRequest request);
   Future<Result<SingleResponse>> deleteMemo(MemoDeleteRequest request);
+  Future<Result<SingleResponse>> insertAlerm(AlarmSaveRequest request);
 }

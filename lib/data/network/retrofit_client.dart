@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:farming_manager/data/request/alarm_save_request.dart';
 import 'package:farming_manager/data/request/dstr_prevnt_list_request.dart';
 import 'package:farming_manager/data/request/kind_detail_request.dart';
 import 'package:farming_manager/data/request/memo_delete_request.dart';
@@ -74,6 +75,11 @@ abstract class RetrofitClient {
 
   @POST("/appApi/deleteMemo")
   Future<SingleResponse> deleteMemo(@Body() MemoDeleteRequest request);
+
+
+  @POST("/appApi/insertAlerm")
+  Future<SingleResponse> insertAlerm(@Body() AlarmSaveRequest request);
+
 
 
 

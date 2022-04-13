@@ -1,6 +1,7 @@
 import 'package:farming_manager/data/network/retrofit_client.dart';
 import 'package:farming_manager/data/network/state/result.dart';
 import 'package:farming_manager/data/repository/farming_repository.dart';
+import 'package:farming_manager/data/request/alarm_save_request.dart';
 import 'package:farming_manager/data/request/dstr_prevnt_list_request.dart';
 import 'package:farming_manager/data/request/kind_detail_request.dart';
 import 'package:farming_manager/data/request/memo_delete_request.dart';
@@ -70,4 +71,7 @@ class FarmingRepositoryImpl extends FarmingRepository {
 
   @override
   Future<Result<SingleResponse>> saveMemo(MemoSaveRequest request)  async => safeCall(_retrofitClient.saveMemo(request));
+
+  @override
+  Future<Result<SingleResponse>> insertAlerm(AlarmSaveRequest request)  async => safeCall(_retrofitClient.insertAlerm(request));
 }

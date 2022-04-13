@@ -24,6 +24,10 @@ String dataTimeToString(DateTime epoch) {
   return DateFormat('yyyy년 M월 d일', 'ko').format(epoch);
 }
 
+String convertToString(DateTime epoch) {
+  return DateFormat('yyyyMMdd', 'ko').format(epoch);
+}
+
 class MapString {
   static Icon mapStringToIcon(
       String input, BuildContext context, double iconSize) {

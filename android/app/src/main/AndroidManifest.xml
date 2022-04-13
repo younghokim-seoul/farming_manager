@@ -20,7 +20,7 @@
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:label="farming_manager"
+        android:label="농사 뭐하니?"
         android:requestLegacyExternalStorage="true"
         android:showWhenLocked="true"
         android:turnScreenOn="true"

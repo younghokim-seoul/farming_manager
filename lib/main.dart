@@ -129,7 +129,7 @@ _firebaseSetting() async {
       flutterLocalNotificationsPlugin.show(
         data.hashCode,
         data['title'],
-        data['message'],
+        data['body'],
         details,
       );
     }

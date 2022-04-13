@@ -4,7 +4,9 @@ import 'package:farming_manager/constants/colors.dart';
 import 'package:farming_manager/constants/strings.dart';
 import 'package:farming_manager/controller/alarm/alarm_view_model.dart';
 import 'package:farming_manager/utils/utils.dart';
+import 'package:farming_manager/utils/validator.dart';
 import 'package:farming_manager/widgets/farming_text.dart';
+import 'package:farming_manager/widgets/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -12,9 +14,10 @@ import 'package:get/get.dart';
 class AlarmScreen extends GetView<AlarmViewModel> {
   AlarmScreen({Key? key}) : super(key: key);
 
-  var titleEditingController = TextEditingController();
-  var contentEditingController = TextEditingController();
+  var titleEditingController = TextEditingController(text: "간디");
+  var contentEditingController = TextEditingController(text: "평화주의자");
   var timeEditingController = TextEditingController();
+  Validator validator = Validator();
 
   @override
   Widget build(BuildContext context) {
@@ -204,17 +207,37 @@ class AlarmScreen extends GetView<AlarmViewModel> {
                   Row(
                     children: [
                       SizedBox(width: Get.width * 0.03),
-                      SizedBox(
+                  SizedBox(
                         width: Get.width * 0.3,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             primary: const Color.fromARGB(255, 216, 200, 155),
                             textStyle: const TextStyle(fontSize: 20),
                           ),
-                          onPressed: () async {},
-                          child: const Text('설정'),
+                          onPressed: () async {
+                            String? titleValid = validator.validateHangle(titleEditingController.text);
+                            String? contentValid = validator.validateHangle(contentEditingController.text);
+                            String? timeValid = validator.validate6DigitCode(timeEditingController.text);
+                            if(titleValid != null){
+                              MessageUtil.showToast(titleValid);
+                              return;
+                            }
+
+                            if(contentValid != null){
+                              MessageUtil.showToast(contentValid);
+                              return;
+                            }
+                            if(timeValid != null){
+                              MessageUtil.showToast(timeValid);
+                              return;
+                            }
+
+                            controller.saveAlarm(titleEditingController.text, contentEditingController.text, timeEditingController.text);
+
+
+                          },
+                          child: const Text('설정'),)
                         ),
-                      ),
                     ],
                   ),
                 ],
