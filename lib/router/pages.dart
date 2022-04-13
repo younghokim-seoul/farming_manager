@@ -1,3 +1,4 @@
+import 'package:farming_manager/controller/alarm/alarm_binding.dart';
 import 'package:farming_manager/controller/dstrprevnt/disaster_prevnt_binding.dart';
 import 'package:farming_manager/controller/home/home_binding.dart';
 import 'package:farming_manager/controller/kind/kind_information_binding.dart';
@@ -8,6 +9,7 @@ import 'package:farming_manager/controller/teck/teck_skill_binding.dart';
 import 'package:farming_manager/controller/teck/teck_skill_detail_binding.dart';
 import 'package:farming_manager/controller/video/vedio_binding.dart';
 import 'package:farming_manager/router/routese.dart';
+import 'package:farming_manager/screens/alarm.dart';
 import 'package:farming_manager/screens/calendar.dart';
 import 'package:farming_manager/screens/disaster_prevnt.dart';
 import 'package:farming_manager/screens/home.dart';
@@ -65,5 +67,7 @@ abstract class AppPages {
         binding: TeckSkillDetailBinding()),
     GetPage(
         name: Routes.VEDIO, page: () => VedioScreen(), binding: VedioBinding()),
+    GetPage(
+        name: Routes.ALARM, page: () => AlarmScreen(), binding: AlarmBinding()),
   ];
 }

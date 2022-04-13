@@ -47,7 +47,7 @@ class VideoViewModel extends GetxController {
         fetchVedioDetail(queryCursor);
       }
     });
-    await LocalPreferenceManager.putToken("asdsadasd").then((value) =>
+    await LocalPreferenceManager.putToken("김지철").then((value) =>
         LocalPreferenceManager.getToken().then((value) => logger.i(":::테스트 " + value.toString())));
     super.onInit();
 

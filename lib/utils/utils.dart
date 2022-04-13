@@ -11,7 +11,7 @@ const List<HomeCategoryModel> categories = [
   HomeCategoryModel(name: "재해 예방정보", id: Routes.DISASTER_PREVNT),
   HomeCategoryModel(name: "현장애로기술사례", id: Routes.TECK),
   HomeCategoryModel(name: "농업기술동영상", id: Routes.VEDIO),
-  HomeCategoryModel(name: "미리알림", id: Routes.KING_INFORMATION),
+  HomeCategoryModel(name: "미리알림", id: Routes.ALARM),
   HomeCategoryModel(name: "달력", id: Routes.CALENDAR)
 ];
 

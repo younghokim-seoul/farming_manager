@@ -10,7 +10,7 @@ abstract class Routes {
   static const TECK = '/teck';
   static const TECK_DETAIL = '/teck_detail';
   static const VEDIO = '/vedio';
-
+  static const ALARM = '/alarm';
 
 
 }
