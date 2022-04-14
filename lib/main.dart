@@ -86,6 +86,8 @@ _firebaseSetting() async {
     requestAlertPermission: true,
   );
 
+
+
   var flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   await flutterLocalNotificationsPlugin
