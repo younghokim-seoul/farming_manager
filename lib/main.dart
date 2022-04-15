@@ -117,7 +117,8 @@ _firebaseSetting() async {
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     logger.i('Got a message whilst in the foreground!' + "\n" + 'Message data: ${message.data}');
 
-    var data = message.data;
+    RemoteNotification? notification = message.notification;
+    AndroidNotification? android = message.notification?.android;
     var androidNotiDetails = AndroidNotificationDetails(
       channel.id,
       channel.name,
@@ -127,11 +128,11 @@ _firebaseSetting() async {
     var details =
         NotificationDetails(android: androidNotiDetails, iOS: iOSNotiDetails);
 
-    if (data.isNotEmpty) {
+    if (notification != null) {
       flutterLocalNotificationsPlugin.show(
-        data.hashCode,
-        data['title'],
-        data['body'],
+        notification.hashCode,
+        notification.title,
+        notification.body,
         details,
       );
     }
